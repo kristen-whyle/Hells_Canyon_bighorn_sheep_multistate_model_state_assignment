@@ -19,7 +19,7 @@ site: bookdown::bookdown_site
 
 # Movement ecology of bighorn sheep in Hells Canyon
 
-This multi-state model state assignment workflow is part of a larger PhD project investigating the movement ecology of bighorn sheep (*Ovis canadensis*) in the Hells Canyon region of Idaho, Washington and Oregon. The work is being carried out by Kristen Whyle under the supervision of Dr. Simona Picardi at the University of Idaho, and in collaboration with the Idaho department of Fish and Game, the Washington Department of Fish and Wildlife and the Oregon Department of Fish and Wildlife.
+This multi-state model state assignment workflow is part of a larger PhD project investigating the movement ecology of bighorn sheep (*Ovis canadensis*) in the Hells Canyon region of Idaho, Washington and Oregon. The work is being carried out by Kristen Whyle under the supervision of Dr. Simona Picardi at the University of Idaho, and in collaboration with the Idaho Department of Fish and Game, the Washington Department of Fish and Wildlife and the Oregon Department of Fish and Wildlife.
 
 
 ```{r fig.cap = "Bighorn sheep in Hells Canyon", fig.align='center', out.width='80%', echo = FALSE}

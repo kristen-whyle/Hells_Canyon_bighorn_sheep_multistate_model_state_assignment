@@ -8,7 +8,7 @@ This chapter goes through the multi-state model workflow of assigning bighorn sh
 
 First we will clear our R environment and load the necessary packages for this workflow.
 
-```{r clear environment and load packages, warning=FALSE, echo=FALSE}
+```{r clear environment and load packages, warning=FALSE}
 
 # clear environment
 rm(list=ls())
@@ -232,7 +232,7 @@ Examine the distribution of states in the data:
 # number of points assigned to each state across location dataset:
 table(dat$state)
 
-#proportion of locations in each state:
+# proportion of locations in each state:
 round(table(dat$state)/nrow(dat), 2)
 
 ```
@@ -446,7 +446,6 @@ Calculate the proportion of state switches by different grouping variables:
 
 
 ```{r calc prop switched by diff grp vars}
-# Calculate the proportion of state switches by different grouping variables ----
 
 # proportion of state_switches switches by age:
 stateswitch_byage2 <- do.call("rbind", lapply(unique(dat$AGECLASS), function(x){
