@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Data inputs and Entity Relationship Diagram | Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Data inputs and Entity Relationship Diagram | Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Data inputs and Entity Relationship Diagram | Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="Kristen Whyle" />
+
+
+<meta name="date" content="2024-12-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="multi-state-model-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Movement ecology of bighorn sheep in Hells Canyon</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#hells-canyon-bighorn-sheep"><i class="fa fa-check"></i><b>1.1</b> Hells Canyon bighorn sheep</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#multi-state-model"><i class="fa fa-check"></i><b>1.2</b> Multi-state model</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html"><i class="fa fa-check"></i><b>2</b> Data inputs and Entity Relationship Diagram</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#database-creation"><i class="fa fa-check"></i><b>2.1</b> Database creation</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#load-packages-and-initiate-database"><i class="fa fa-check"></i><b>2.1.1</b> Load packages and initiate database</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#create-animals-table"><i class="fa fa-check"></i><b>2.1.2</b> Create animals table</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#create-collars-table"><i class="fa fa-check"></i><b>2.1.3</b> Create collars table</a></li>
+<li class="chapter" data-level="2.1.4" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#create-locations-table"><i class="fa fa-check"></i><b>2.1.4</b> Create locations table</a></li>
+<li class="chapter" data-level="2.1.5" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#check-database-data"><i class="fa fa-check"></i><b>2.1.5</b> Check database data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html"><i class="fa fa-check"></i><b>3</b> Multi-state model</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#setup-import-clean-and-prepare-data"><i class="fa fa-check"></i><b>3.1</b> Setup: import, clean, and prepare data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#import-data"><i class="fa fa-check"></i><b>3.1.1</b> Import data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#clean-and-format-data"><i class="fa fa-check"></i><b>3.1.2</b> Clean and format data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#state-assignment"><i class="fa fa-check"></i><b>3.2</b> State assignment</a></li>
+<li class="chapter" data-level="3.3" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#state-switches"><i class="fa fa-check"></i><b>3.3</b> State-switches</a></li>
+<li class="chapter" data-level="3.4" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#create-additional-summary-data"><i class="fa fa-check"></i><b>3.4</b> Create additional summary data</a></li>
+<li class="chapter" data-level="3.5" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#data-visualization"><i class="fa fa-check"></i><b>3.5</b> Data visualization</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#histograms-of-state-switches"><i class="fa fa-check"></i><b>3.5.1</b> histograms of state-switches</a></li>
+<li class="chapter" data-level="3.5.2" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#examine-the-number-of-populations-individuals-were-found-in-across-their-data"><i class="fa fa-check"></i><b>3.5.2</b> Examine the number of populations individuals were found in across their data:</a></li>
+<li class="chapter" data-level="3.5.3" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#examine-number-of-locations-in-each-state-across-the-data"><i class="fa fa-check"></i><b>3.5.3</b> Examine number of locations in each state across the data:</a></li>
+<li class="chapter" data-level="3.5.4" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#examine-number-of-state-switches-across-the-data"><i class="fa fa-check"></i><b>3.5.4</b> Examine number of state switches across the data:</a></li>
+<li class="chapter" data-level="3.5.5" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#examine-state-switches-by-age"><i class="fa fa-check"></i><b>3.5.5</b> Examine state switches by age:</a></li>
+<li class="chapter" data-level="3.5.6" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-proportions-by-age"><i class="fa fa-check"></i><b>3.5.6</b> Plot state proportions by age:</a></li>
+<li class="chapter" data-level="3.5.7" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-proportions-by-sex"><i class="fa fa-check"></i><b>3.5.7</b> Plot state proportions by sex:</a></li>
+<li class="chapter" data-level="3.5.8" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-proportions-by-age-sex-combo"><i class="fa fa-check"></i><b>3.5.8</b> Plot state proportions by age + sex combo:</a></li>
+<li class="chapter" data-level="3.5.9" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-proportions-by-population"><i class="fa fa-check"></i><b>3.5.9</b> Plot state proportions by population:</a></li>
+<li class="chapter" data-level="3.5.10" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-switch-proportions-by-age-sex-combo"><i class="fa fa-check"></i><b>3.5.10</b> Plot state switch proportions by age + sex combo:</a></li>
+<li class="chapter" data-level="3.5.11" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-switch-proportions-by-home-population"><i class="fa fa-check"></i><b>3.5.11</b> Plot state switch proportions by home population:</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-inputs-and-entity-relationship-diagram" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Data inputs and Entity Relationship Diagram<a href="data-inputs-and-entity-relationship-diagram.html#data-inputs-and-entity-relationship-diagram" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The input data for this multi-state model workflow include a track_xyt R object, which is a processed version of the bighorn sheep location data created from the “raw” data inputs in previous workflows (processing steps are not shown here; those workflows partially cleaned and formatted the data), as well as a shapefile containing the Hells Canyon bighorn sheep popultion range polygons delineated by managers at Fish &amp; Game/Wildlife.</p>
+<p>The “raw” data that was shared by the state wildlife agencies include separate data frames containing information on bighorn sheep locations, on individual animals, and on VHF/GPS collar deployments. Figure 2.1 shows how these data tables relate to each other in an Entity Relationship Diagram (ERD).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="images/ERD.png" alt="ERD for Hells Canyon bighorn sheep data. PK indicates primary key and FK indicates foreign key." width="80%" />
+<p class="caption">
+Figure 2.1: ERD for Hells Canyon bighorn sheep data. PK indicates primary key and FK indicates foreign key.
+</p>
+</div>
+<div id="database-creation" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Database creation<a href="data-inputs-and-entity-relationship-diagram.html#database-creation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>While the rest of this workflow starts from the multi-state model inputs, here we show how the “raw” data tables relate to each other, and how they can be formatted and input into a SQL database.</p>
+<p>Below are the steps required to build a relational database containing the three tables described in the ERD above.</p>
+<div id="load-packages-and-initiate-database" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Load packages and initiate database<a href="data-inputs-and-entity-relationship-diagram.html#load-packages-and-initiate-database" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-inputs-and-entity-relationship-diagram.html#cb1-1" tabindex="-1"></a><span class="co"># Load packages ----</span></span>
+<span id="cb1-2"><a href="data-inputs-and-entity-relationship-diagram.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb1-3"><a href="data-inputs-and-entity-relationship-diagram.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
+<span id="cb1-4"><a href="data-inputs-and-entity-relationship-diagram.html#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="data-inputs-and-entity-relationship-diagram.html#cb1-5" tabindex="-1"></a><span class="co"># Create database ----</span></span>
+<span id="cb1-6"><a href="data-inputs-and-entity-relationship-diagram.html#cb1-6" tabindex="-1"></a><span class="co"># for Hells Canyon bighorn sheep data</span></span>
+<span id="cb1-7"><a href="data-inputs-and-entity-relationship-diagram.html#cb1-7" tabindex="-1"></a>bighorn_db <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="st">&quot;hells_canyon_bighorn_sheep.db&quot;</span>)</span></code></pre></div>
+</div>
+<div id="create-animals-table" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Create animals table<a href="data-inputs-and-entity-relationship-diagram.html#create-animals-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The animals table contains data on the individual bighorn sheep in the dataset and includes the following columns: animal_id (primary key; individual identity for each animal), population (the home population of an individual), sex, date_of_birth, and source (source indicates whether an individual is a resident of Hells Canyon who was never translocated (R), is a resident of Hells Canyon who was translocated within the Hells Canyon metapopulation (RT), or is a translocated animal originating from outside of the Hells Canyon metapopulation (T)).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-1" tabindex="-1"></a><span class="co"># Create animals table in SQL: ----</span></span>
+<span id="cb2-2"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-2" tabindex="-1"></a><span class="fu">dbExecute</span>(bighorn_db,</span>
+<span id="cb2-3"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-3" tabindex="-1"></a>          <span class="st">&quot;CREATE TABLE animals (</span></span>
+<span id="cb2-4"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-4" tabindex="-1"></a><span class="st">          animal_id char(6) NOT NULL PRIMARY KEY,</span></span>
+<span id="cb2-5"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-5" tabindex="-1"></a><span class="st">          population varchar(20),</span></span>
+<span id="cb2-6"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-6" tabindex="-1"></a><span class="st">          sex char(1) CHECK (sex IN (&#39;M&#39;, &#39;F&#39;, &#39;&#39;)),</span></span>
+<span id="cb2-7"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-7" tabindex="-1"></a><span class="st">          date_of_birth date,</span></span>
+<span id="cb2-8"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-8" tabindex="-1"></a><span class="st">          source varchar(2) CHECK (source IN (&#39;R&#39;, &#39;RT&#39;, &#39;T&#39;))</span></span>
+<span id="cb2-9"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-9" tabindex="-1"></a><span class="st">          );&quot;</span>)</span>
+<span id="cb2-10"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-11" tabindex="-1"></a><span class="co"># Load animals csv into R</span></span>
+<span id="cb2-12"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-12" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;input_data/animals.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-13"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-13" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-14" tabindex="-1"></a><span class="co"># Check if column names match between SQL table and csv file</span></span>
+<span id="cb2-15"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-15" tabindex="-1"></a><span class="fu">colnames</span>(animals)</span>
+<span id="cb2-16"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-16" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-17" tabindex="-1"></a><span class="co"># re-name columns from animals data frame to match the SQL table created above</span></span>
+<span id="cb2-18"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-18" tabindex="-1"></a><span class="fu">colnames</span>(animals) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;animal_id&quot;</span>, <span class="st">&quot;population&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;source&quot;</span>, <span class="st">&quot;date_of_birth&quot;</span>)</span>
+<span id="cb2-19"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-19" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-20" tabindex="-1"></a><span class="co"># Input data from csv into SQL table</span></span>
+<span id="cb2-21"><a href="data-inputs-and-entity-relationship-diagram.html#cb2-21" tabindex="-1"></a><span class="fu">dbWriteTable</span>(bighorn_db, <span class="st">&quot;animals&quot;</span>, animals, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="create-collars-table" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Create collars table<a href="data-inputs-and-entity-relationship-diagram.html#create-collars-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The collars table contains info about each collar deployment and includes the following columns: collar_deployment_id (primary key; unique identity for each collar deployment), animal_ID (foreign key linking the collars table with the animals table), collar_serial_number, deployment_start_date, deployment_end_date, collar_type, frequency, and manufacturer.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-1" tabindex="-1"></a><span class="co"># Create collars table in SQL: ----</span></span>
+<span id="cb3-2"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-2" tabindex="-1"></a><span class="fu">dbExecute</span>(bighorn_db,</span>
+<span id="cb3-3"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-3" tabindex="-1"></a>          <span class="st">&quot;CREATE TABLE collars (</span></span>
+<span id="cb3-4"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-4" tabindex="-1"></a><span class="st">          collar_deployment_id integer NOT NULL PRIMARY KEY AUTOINCREMENT,</span></span>
+<span id="cb3-5"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-5" tabindex="-1"></a><span class="st">          animal_id char(6),</span></span>
+<span id="cb3-6"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-6" tabindex="-1"></a><span class="st">          collar_serial_number varchar(14),</span></span>
+<span id="cb3-7"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-7" tabindex="-1"></a><span class="st">          deployment_start_date date,</span></span>
+<span id="cb3-8"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-8" tabindex="-1"></a><span class="st">          deployment_end_date date,</span></span>
+<span id="cb3-9"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-9" tabindex="-1"></a><span class="st">          collar_type varchar(14),</span></span>
+<span id="cb3-10"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-10" tabindex="-1"></a><span class="st">          frequency real,</span></span>
+<span id="cb3-11"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-11" tabindex="-1"></a><span class="st">          manufacturer varchar(25), </span></span>
+<span id="cb3-12"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-12" tabindex="-1"></a><span class="st">          FOREIGN KEY (animal_id) REFERENCES animals(animal_id)</span></span>
+<span id="cb3-13"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-13" tabindex="-1"></a><span class="st">          );&quot;</span>)</span>
+<span id="cb3-14"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-14" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-15" tabindex="-1"></a><span class="co"># Load collars csv into R</span></span>
+<span id="cb3-16"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-16" tabindex="-1"></a>collars <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;input_data/collars.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-17"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-18" tabindex="-1"></a><span class="co"># Check if column names match between SQL table and csv file</span></span>
+<span id="cb3-19"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-19" tabindex="-1"></a><span class="fu">colnames</span>(collars)</span>
+<span id="cb3-20"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-20" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-21" tabindex="-1"></a><span class="co"># re-name columns from collars data frame to match the SQL table created above</span></span>
+<span id="cb3-22"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-22" tabindex="-1"></a><span class="fu">colnames</span>(collars) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;animal_id&quot;</span>, </span>
+<span id="cb3-23"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-23" tabindex="-1"></a>                               <span class="st">&quot;deployment_start_date&quot;</span>, <span class="st">&quot;deployment_end_date&quot;</span>,</span>
+<span id="cb3-24"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-24" tabindex="-1"></a>                               <span class="st">&quot;collar_type&quot;</span>, <span class="st">&quot;frequency&quot;</span>, <span class="st">&quot;manufacturer&quot;</span>,</span>
+<span id="cb3-25"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-25" tabindex="-1"></a>                               <span class="st">&quot;collar_serial_number&quot;</span>)</span>
+<span id="cb3-26"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-26" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-27" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-28" tabindex="-1"></a><span class="co"># Input data from csv into SQL table</span></span>
+<span id="cb3-29"><a href="data-inputs-and-entity-relationship-diagram.html#cb3-29" tabindex="-1"></a><span class="fu">dbWriteTable</span>(bighorn_db, <span class="st">&quot;collars&quot;</span>, collars, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="create-locations-table" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Create locations table<a href="data-inputs-and-entity-relationship-diagram.html#create-locations-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The locations table contains info about each bighorn sheep location and includes the following columns: location_id (primary key; unique identity for each bighorn sheep location), collar_deployment_id (foreign key linking the locations table with the collars table), date, time, latitude, longitude, and location_type (either the location was recorded from a GPS-collar (GPS), or from a ground-based field survey (G) or an aerial-based field survey (A)).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-1" tabindex="-1"></a><span class="co"># Create locations table in SQL: ----</span></span>
+<span id="cb4-2"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-2" tabindex="-1"></a><span class="fu">dbExecute</span>(bighorn_db,</span>
+<span id="cb4-3"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-3" tabindex="-1"></a>          <span class="st">&quot;CREATE TABLE locations (</span></span>
+<span id="cb4-4"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-4" tabindex="-1"></a><span class="st">          location_id integer NOT NULL PRIMARY KEY AUTOINCREMENT,</span></span>
+<span id="cb4-5"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-5" tabindex="-1"></a><span class="st">          collar_deployment_id integer,</span></span>
+<span id="cb4-6"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-6" tabindex="-1"></a><span class="st">          date date,</span></span>
+<span id="cb4-7"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-7" tabindex="-1"></a><span class="st">          time char(8),</span></span>
+<span id="cb4-8"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-8" tabindex="-1"></a><span class="st">          latitude real,</span></span>
+<span id="cb4-9"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-9" tabindex="-1"></a><span class="st">          longitude real,</span></span>
+<span id="cb4-10"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-10" tabindex="-1"></a><span class="st">          location_type varchar(3),</span></span>
+<span id="cb4-11"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-11" tabindex="-1"></a><span class="st">          FOREIGN KEY (collar_deployment_id) REFERENCES collars(collar_deployment_id)</span></span>
+<span id="cb4-12"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-12" tabindex="-1"></a><span class="st">          );&quot;</span>)</span>
+<span id="cb4-13"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-13" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-14" tabindex="-1"></a><span class="co"># Load locations csv into R</span></span>
+<span id="cb4-15"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-15" tabindex="-1"></a>locations <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;input_data/locations.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-16"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-16" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-17" tabindex="-1"></a><span class="co"># create collar_deployment_id column and add it to this dataframe: ----</span></span>
+<span id="cb4-18"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-18" tabindex="-1"></a><span class="co"># based on the colar_deployment_id in the SQL table</span></span>
+<span id="cb4-19"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-19" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-20" tabindex="-1"></a><span class="co"># pull the SQL collars table into the environment as an object</span></span>
+<span id="cb4-21"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-21" tabindex="-1"></a>sql_collars <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(bighorn_db, <span class="st">&quot;SELECT * FROM collars&quot;</span>)</span>
+<span id="cb4-22"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-22" tabindex="-1"></a><span class="co"># turn deployment_start_date into a date using lubridate package&#39;s dmy function</span></span>
+<span id="cb4-23"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-23" tabindex="-1"></a>sql_collars<span class="sc">$</span>deployment_start_date <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(sql_collars<span class="sc">$</span>deployment_start_date)</span>
+<span id="cb4-24"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-24" tabindex="-1"></a><span class="co"># turn deployment_end_date into a date using lubridate package&#39;s dmy function</span></span>
+<span id="cb4-25"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-25" tabindex="-1"></a>sql_collars<span class="sc">$</span>deployment_end_date <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(sql_collars<span class="sc">$</span>deployment_end_date)</span>
+<span id="cb4-26"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-26" tabindex="-1"></a><span class="co"># replace collar deployment_end_dates that are NA (haven&#39;t dropped yet) with today&#39;s date</span></span>
+<span id="cb4-27"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-27" tabindex="-1"></a>sql_collars[<span class="fu">which</span>(<span class="fu">is.na</span>(sql_collars<span class="sc">$</span>deployment_end_date)),]<span class="sc">$</span>deployment_end_date <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb4-28"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-28" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-29" tabindex="-1"></a><span class="co"># add the appropriate collar_deployment_id to each row of the locations table</span></span>
+<span id="cb4-30"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-30" tabindex="-1"></a>locations<span class="sc">$</span>collar_deployment_id <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(locations), <span class="cf">function</span>(x){</span>
+<span id="cb4-31"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-31" tabindex="-1"></a>  <span class="fu">print</span>(x)</span>
+<span id="cb4-32"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-32" tabindex="-1"></a>  <span class="co"># pull out the animal ID and date for each location</span></span>
+<span id="cb4-33"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-33" tabindex="-1"></a>  animal_id <span class="ot">&lt;-</span> locations<span class="sc">$</span>ANIMALID[x]</span>
+<span id="cb4-34"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-34" tabindex="-1"></a>  date <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">mdy</span>(locations<span class="sc">$</span>DATE[x])</span>
+<span id="cb4-35"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-35" tabindex="-1"></a>  <span class="co"># subset sql_collars to the animal ID and date range that matches the location</span></span>
+<span id="cb4-36"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-36" tabindex="-1"></a>  <span class="co"># and return the appropriate collar_deployment_id</span></span>
+<span id="cb4-37"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-37" tabindex="-1"></a>  collar_deployment_id <span class="ot">&lt;-</span> sql_collars[<span class="fu">intersect</span>(<span class="fu">which</span>(sql_collars<span class="sc">$</span>animal_id<span class="sc">==</span>animal_id), </span>
+<span id="cb4-38"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-38" tabindex="-1"></a>                                                <span class="fu">intersect</span>(<span class="fu">which</span>(sql_collars<span class="sc">$</span>deployment_start_date <span class="sc">&lt;=</span> date), </span>
+<span id="cb4-39"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-39" tabindex="-1"></a>                                                          <span class="fu">which</span>(sql_collars<span class="sc">$</span>deployment_end_date <span class="sc">&gt;=</span> date))),]<span class="sc">$</span>collar_deployment_id[<span class="dv">1</span>]</span>
+<span id="cb4-40"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-40" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(collar_deployment_id)<span class="sc">==</span><span class="dv">1</span>){<span class="fu">return</span>(collar_deployment_id)} <span class="cf">else</span> {<span class="fu">return</span>(<span class="cn">NA</span>)}</span>
+<span id="cb4-41"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-41" tabindex="-1"></a>}))</span>
+<span id="cb4-42"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-42" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-43" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-44" tabindex="-1"></a><span class="co"># Check if column names match between SQL table and csv file</span></span>
+<span id="cb4-45"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-45" tabindex="-1"></a><span class="fu">colnames</span>(locations)</span>
+<span id="cb4-46"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-46" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-47" tabindex="-1"></a><span class="co"># subset the locations dataframe to only the necessary columns:</span></span>
+<span id="cb4-48"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-48" tabindex="-1"></a>locations <span class="ot">&lt;-</span> locations[,<span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">7</span>)]</span>
+<span id="cb4-49"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-49" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-50" tabindex="-1"></a><span class="co"># re-name columns from locations data frame to match the SQL table created above</span></span>
+<span id="cb4-51"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-51" tabindex="-1"></a><span class="fu">colnames</span>(locations)[<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;date&quot;</span>,<span class="st">&quot;time&quot;</span>,<span class="st">&quot;latitude&quot;</span>, <span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;location_type&quot;</span>)</span>
+<span id="cb4-52"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-52" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-53" tabindex="-1"></a><span class="co"># Input data from csv into SQL table</span></span>
+<span id="cb4-54"><a href="data-inputs-and-entity-relationship-diagram.html#cb4-54" tabindex="-1"></a><span class="fu">dbWriteTable</span>(bighorn_db, <span class="st">&quot;locations&quot;</span>, locations, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="check-database-data" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Check database data<a href="data-inputs-and-entity-relationship-diagram.html#check-database-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-inputs-and-entity-relationship-diagram.html#cb5-1" tabindex="-1"></a><span class="co"># Check that data was properly loaded into SQL database ----</span></span>
+<span id="cb5-2"><a href="data-inputs-and-entity-relationship-diagram.html#cb5-2" tabindex="-1"></a>bighorn_db <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="st">&quot;hells_canyon_bighorn_sheep.db&quot;</span>)</span>
+<span id="cb5-3"><a href="data-inputs-and-entity-relationship-diagram.html#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="data-inputs-and-entity-relationship-diagram.html#cb5-4" tabindex="-1"></a><span class="co"># Check animals table</span></span>
+<span id="cb5-5"><a href="data-inputs-and-entity-relationship-diagram.html#cb5-5" tabindex="-1"></a><span class="fu">dbGetQuery</span>(bighorn_db, <span class="st">&quot;SELECT * FROM animals LIMIT 3;&quot;</span>)</span></code></pre></div>
+<pre><code>##   animal_id population sex date_of_birth source
+## 1    21LO19    Lostine   F     5/15/2019      R
+## 2    21LO27    Lostine   F     5/15/2020      R
+## 3    21LO03    Lostine   F     5/15/2020      R</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-inputs-and-entity-relationship-diagram.html#cb7-1" tabindex="-1"></a><span class="co"># Check collars table</span></span>
+<span id="cb7-2"><a href="data-inputs-and-entity-relationship-diagram.html#cb7-2" tabindex="-1"></a><span class="fu">dbGetQuery</span>(bighorn_db, <span class="st">&quot;SELECT * FROM collars LIMIT 3;&quot;</span>)</span></code></pre></div>
+<pre><code>##   collar_deployment_id animal_id collar_serial_number deployment_start_date
+## 1                    1    21LO19                                  23-Apr-21
+## 2                    2    21LO27                                  23-Apr-21
+## 3                    3    21LO03                                   3-Mar-21
+##   deployment_end_date collar_type frequency manufacturer
+## 1                            None     0.000             
+## 2           19-Jan-22         VHF   150.272          ATS
+## 3            1-Mar-22         VHF   150.253          ATS</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-inputs-and-entity-relationship-diagram.html#cb9-1" tabindex="-1"></a><span class="co"># Check locations table</span></span>
+<span id="cb9-2"><a href="data-inputs-and-entity-relationship-diagram.html#cb9-2" tabindex="-1"></a><span class="fu">dbGetQuery</span>(bighorn_db, <span class="st">&quot;SELECT * FROM locations LIMIT 3;&quot;</span>)</span></code></pre></div>
+<pre><code>##   location_id collar_deployment_id     date    time latitude longitude
+## 1           1                 1212 1/7/2020 0:00:00 45.85665 -116.7908
+## 2           2                 1212 1/7/2020 4:00:00 45.85692 -116.7908
+## 3           3                 1212 1/7/2020 8:00:00 45.85736 -116.7909
+##   location_type
+## 1           GPS
+## 2           GPS
+## 3           GPS</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multi-state-model-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

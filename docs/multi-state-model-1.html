@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Multi-state model | Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Multi-state model | Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Multi-state model | Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="Kristen Whyle" />
+
+
+<meta name="date" content="2024-12-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-inputs-and-entity-relationship-diagram.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Movement ecology of bighorn sheep in Hells Canyon</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#hells-canyon-bighorn-sheep"><i class="fa fa-check"></i><b>1.1</b> Hells Canyon bighorn sheep</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#multi-state-model"><i class="fa fa-check"></i><b>1.2</b> Multi-state model</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html"><i class="fa fa-check"></i><b>2</b> Data inputs and Entity Relationship Diagram</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#database-creation"><i class="fa fa-check"></i><b>2.1</b> Database creation</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#load-packages-and-initiate-database"><i class="fa fa-check"></i><b>2.1.1</b> Load packages and initiate database</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#create-animals-table"><i class="fa fa-check"></i><b>2.1.2</b> Create animals table</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#create-collars-table"><i class="fa fa-check"></i><b>2.1.3</b> Create collars table</a></li>
+<li class="chapter" data-level="2.1.4" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#create-locations-table"><i class="fa fa-check"></i><b>2.1.4</b> Create locations table</a></li>
+<li class="chapter" data-level="2.1.5" data-path="data-inputs-and-entity-relationship-diagram.html"><a href="data-inputs-and-entity-relationship-diagram.html#check-database-data"><i class="fa fa-check"></i><b>2.1.5</b> Check database data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html"><i class="fa fa-check"></i><b>3</b> Multi-state model</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#setup-import-clean-and-prepare-data"><i class="fa fa-check"></i><b>3.1</b> Setup: import, clean, and prepare data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#import-data"><i class="fa fa-check"></i><b>3.1.1</b> Import data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#clean-and-format-data"><i class="fa fa-check"></i><b>3.1.2</b> Clean and format data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#state-assignment"><i class="fa fa-check"></i><b>3.2</b> State assignment</a></li>
+<li class="chapter" data-level="3.3" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#state-switches"><i class="fa fa-check"></i><b>3.3</b> State-switches</a></li>
+<li class="chapter" data-level="3.4" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#create-additional-summary-data"><i class="fa fa-check"></i><b>3.4</b> Create additional summary data</a></li>
+<li class="chapter" data-level="3.5" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#data-visualization"><i class="fa fa-check"></i><b>3.5</b> Data visualization</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#histograms-of-state-switches"><i class="fa fa-check"></i><b>3.5.1</b> histograms of state-switches</a></li>
+<li class="chapter" data-level="3.5.2" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#examine-the-number-of-populations-individuals-were-found-in-across-their-data"><i class="fa fa-check"></i><b>3.5.2</b> Examine the number of populations individuals were found in across their data:</a></li>
+<li class="chapter" data-level="3.5.3" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#examine-number-of-locations-in-each-state-across-the-data"><i class="fa fa-check"></i><b>3.5.3</b> Examine number of locations in each state across the data:</a></li>
+<li class="chapter" data-level="3.5.4" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#examine-number-of-state-switches-across-the-data"><i class="fa fa-check"></i><b>3.5.4</b> Examine number of state switches across the data:</a></li>
+<li class="chapter" data-level="3.5.5" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#examine-state-switches-by-age"><i class="fa fa-check"></i><b>3.5.5</b> Examine state switches by age:</a></li>
+<li class="chapter" data-level="3.5.6" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-proportions-by-age"><i class="fa fa-check"></i><b>3.5.6</b> Plot state proportions by age:</a></li>
+<li class="chapter" data-level="3.5.7" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-proportions-by-sex"><i class="fa fa-check"></i><b>3.5.7</b> Plot state proportions by sex:</a></li>
+<li class="chapter" data-level="3.5.8" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-proportions-by-age-sex-combo"><i class="fa fa-check"></i><b>3.5.8</b> Plot state proportions by age + sex combo:</a></li>
+<li class="chapter" data-level="3.5.9" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-proportions-by-population"><i class="fa fa-check"></i><b>3.5.9</b> Plot state proportions by population:</a></li>
+<li class="chapter" data-level="3.5.10" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-switch-proportions-by-age-sex-combo"><i class="fa fa-check"></i><b>3.5.10</b> Plot state switch proportions by age + sex combo:</a></li>
+<li class="chapter" data-level="3.5.11" data-path="multi-state-model-1.html"><a href="multi-state-model-1.html#plot-state-switch-proportions-by-home-population"><i class="fa fa-check"></i><b>3.5.11</b> Plot state switch proportions by home population:</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multi-state-model-1" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Multi-state model<a href="multi-state-model-1.html#multi-state-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter goes through the multi-state model workflow of assigning bighorn sheep locations to one of the three different states described in Chapter 1, and identifying state-switches in the bighorn sheep movement trajectories.</p>
+<div id="setup-import-clean-and-prepare-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Setup: import, clean, and prepare data<a href="multi-state-model-1.html#setup-import-clean-and-prepare-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="import-data" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Import data<a href="multi-state-model-1.html#import-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First we will clear our R environment and load the necessary packages for this workflow.</p>
+<p>Chapter 2 shows how the “raw” data tables relate to each other; here we will read in a location dataset that came from those “raw” tables and went through some cleaning steps (not shown) that included getting rid of poor quality/unreliable locations. This dataset is in the format of a track_xyt R object.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="multi-state-model-1.html#cb11-1" tabindex="-1"></a>nonsf_dat <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">readRDS</span>(<span class="st">&quot;input_data/trk8a_partially_cleaned_alldata_2024-08.rds&quot;</span>))</span></code></pre></div>
+<p>Now we will load the shapefile delineating population (aka herd) ranges. The population range boundaries in this shapefile have been defined by managers and may be updated in future iterations of this analysis.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="multi-state-model-1.html#cb12-1" tabindex="-1"></a>popn_ranges <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;input_data/shapefiles/HellsCanyonHerds.shp&quot;</span>)</span></code></pre></div>
+</div>
+<div id="clean-and-format-data" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Clean and format data<a href="multi-state-model-1.html#clean-and-format-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before we can assign locations to different states we need to make sure that the population names are consistent
+between the track_xyt location data object and the shapefile object so that we can appropriately assign each location to a state based on the population of the individual the location data point belongs to and the population (or non-population) the location point falls in within the shapefile.</p>
+<div id="harmonize-population-names" class="section level4 hasAnchor" number="3.1.2.1">
+<h4><span class="header-section-number">3.1.2.1</span> Harmonize population names<a href="multi-state-model-1.html#harmonize-population-names" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The ‘NAME’ column in the shapefile data refers to the population; for clarity we re-name that column ‘Population’ here:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="multi-state-model-1.html#cb13-1" tabindex="-1"></a><span class="fu">colnames</span>(popn_ranges)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Population&quot;</span></span></code></pre></div>
+<p>Now we check the population names in each data source:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="multi-state-model-1.html#cb14-1" tabindex="-1"></a><span class="co"># Population names in location data</span></span>
+<span id="cb14-2"><a href="multi-state-model-1.html#cb14-2" tabindex="-1"></a>loc_popnames <span class="ot">&lt;-</span> <span class="fu">unique</span>(nonsf_dat<span class="sc">$</span>POPULATION)</span>
+<span id="cb14-3"><a href="multi-state-model-1.html#cb14-3" tabindex="-1"></a><span class="co"># Population names in shapefile  </span></span>
+<span id="cb14-4"><a href="multi-state-model-1.html#cb14-4" tabindex="-1"></a>shp_popnames <span class="ot">&lt;-</span> <span class="fu">unique</span>(popn_ranges<span class="sc">$</span>Population)</span></code></pre></div>
+<p>Which population names match between the sources?</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="multi-state-model-1.html#cb15-1" tabindex="-1"></a><span class="co"># which population names match between the location data and shapefile:</span></span>
+<span id="cb15-2"><a href="multi-state-model-1.html#cb15-2" tabindex="-1"></a>popname_matches <span class="ot">&lt;-</span> loc_popnames[<span class="fu">which</span>(loc_popnames <span class="sc">%in%</span> shp_popnames)]</span>
+<span id="cb15-3"><a href="multi-state-model-1.html#cb15-3" tabindex="-1"></a>popname_matches</span></code></pre></div>
+<pre><code>## [1] &quot;Black Butte&quot;   &quot;Lostine&quot;       &quot;Redbird&quot;       &quot;Wenaha&quot;       
+## [5] &quot;Asotin&quot;        &quot;Big Canyon&quot;    &quot;Mountain View&quot; &quot;Tucannon&quot;</code></pre>
+<p>Which population names don’t match between the two sources?</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="multi-state-model-1.html#cb17-1" tabindex="-1"></a><span class="co"># population names in shapefile but not location data:</span></span>
+<span id="cb17-2"><a href="multi-state-model-1.html#cb17-2" tabindex="-1"></a>popname_inshpnotloc <span class="ot">&lt;-</span> shp_popnames[<span class="sc">-</span><span class="fu">which</span>(shp_popnames <span class="sc">%in%</span> loc_popnames)]</span>
+<span id="cb17-3"><a href="multi-state-model-1.html#cb17-3" tabindex="-1"></a>popname_inshpnotloc</span></code></pre></div>
+<pre><code>## [1] &quot;Lower Hells Canyon&quot;    &quot;Muir Creek&quot;            &quot;Bear Creek&quot;           
+## [4] &quot;Saddle Cr.&quot;            &quot;Lower Imnaha&quot;          &quot;Upper Hells Canyon ID&quot;
+## [7] &quot;Upper Hells Canyon OR&quot;</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="multi-state-model-1.html#cb19-1" tabindex="-1"></a><span class="co"># population names in location data but not shapefile:</span></span>
+<span id="cb19-2"><a href="multi-state-model-1.html#cb19-2" tabindex="-1"></a>popname_inlocnotshp <span class="ot">&lt;-</span> loc_popnames[<span class="sc">-</span><span class="fu">which</span>(loc_popnames <span class="sc">%in%</span> shp_popnames)]</span>
+<span id="cb19-3"><a href="multi-state-model-1.html#cb19-3" tabindex="-1"></a>popname_inlocnotshp</span></code></pre></div>
+<pre><code>##  [1] &quot;Imnaha&quot;           &quot;Minam&quot;            &quot;Sheep Divide&quot;     &quot;Quartz&quot;          
+##  [5] &quot;Myers&quot;            &quot;05IMREL&quot;          &quot;Sheep Mountain&quot;   &quot;Muir&quot;            
+##  [9] &quot;UHC-ID&quot;           &quot;UHC-OR&quot;           &quot;LowerHellsCanyon&quot; &quot;Upper Saddle&quot;    
+## [13] &quot;McGraw&quot;</code></pre>
+<p>Update the mis-matched population names to the naming conventions in the location data:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="multi-state-model-1.html#cb21-1" tabindex="-1"></a><span class="co"># update shapefile population names to match location data population names:</span></span>
+<span id="cb21-2"><a href="multi-state-model-1.html#cb21-2" tabindex="-1"></a>popn_ranges[<span class="fu">which</span>(popn_ranges<span class="sc">$</span>Population<span class="sc">==</span><span class="st">&quot;Lower Hells Canyon&quot;</span>),]<span class="sc">$</span>Population <span class="ot">&lt;-</span> <span class="st">&quot;LowerHellsCanyon&quot;</span></span>
+<span id="cb21-3"><a href="multi-state-model-1.html#cb21-3" tabindex="-1"></a>popn_ranges[<span class="fu">which</span>(popn_ranges<span class="sc">$</span>Population<span class="sc">==</span><span class="st">&quot;Muir Creek&quot;</span>),]<span class="sc">$</span>Population <span class="ot">&lt;-</span> <span class="st">&quot;Muir&quot;</span></span>
+<span id="cb21-4"><a href="multi-state-model-1.html#cb21-4" tabindex="-1"></a>popn_ranges[<span class="fu">which</span>(popn_ranges<span class="sc">$</span>Population<span class="sc">==</span><span class="st">&quot;Saddle Cr.&quot;</span>),]<span class="sc">$</span>Population <span class="ot">&lt;-</span> <span class="st">&quot;Upper Saddle&quot;</span></span>
+<span id="cb21-5"><a href="multi-state-model-1.html#cb21-5" tabindex="-1"></a>popn_ranges[<span class="fu">which</span>(popn_ranges<span class="sc">$</span>Population<span class="sc">==</span><span class="st">&quot;Lower Imnaha&quot;</span>),]<span class="sc">$</span>Population <span class="ot">&lt;-</span> <span class="st">&quot;Imnaha&quot;</span></span>
+<span id="cb21-6"><a href="multi-state-model-1.html#cb21-6" tabindex="-1"></a>popn_ranges[<span class="fu">which</span>(popn_ranges<span class="sc">$</span>Population<span class="sc">==</span><span class="st">&quot;Upper Hells Canyon ID&quot;</span>),]<span class="sc">$</span>Population <span class="ot">&lt;-</span> <span class="st">&quot;UHC-ID&quot;</span></span>
+<span id="cb21-7"><a href="multi-state-model-1.html#cb21-7" tabindex="-1"></a>popn_ranges[<span class="fu">which</span>(popn_ranges<span class="sc">$</span>Population<span class="sc">==</span><span class="st">&quot;Upper Hells Canyon OR&quot;</span>),]<span class="sc">$</span>Population <span class="ot">&lt;-</span> <span class="st">&quot;UHC-OR&quot;</span></span></code></pre></div>
+<p>Now that we have updated the population names that we could, re-check which population names match betweeen the two sources and which still don’t match:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="multi-state-model-1.html#cb22-1" tabindex="-1"></a><span class="co"># re-check population matching:</span></span>
+<span id="cb22-2"><a href="multi-state-model-1.html#cb22-2" tabindex="-1"></a>loc_popnames <span class="ot">&lt;-</span> <span class="fu">unique</span>(nonsf_dat<span class="sc">$</span>POPULATION)</span>
+<span id="cb22-3"><a href="multi-state-model-1.html#cb22-3" tabindex="-1"></a>shp_popnames <span class="ot">&lt;-</span> <span class="fu">unique</span>(popn_ranges<span class="sc">$</span>Population)</span>
+<span id="cb22-4"><a href="multi-state-model-1.html#cb22-4" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="multi-state-model-1.html#cb22-5" tabindex="-1"></a><span class="co"># populations that match:</span></span>
+<span id="cb22-6"><a href="multi-state-model-1.html#cb22-6" tabindex="-1"></a>popname_matches <span class="ot">&lt;-</span> loc_popnames[<span class="fu">which</span>(loc_popnames <span class="sc">%in%</span> shp_popnames)]</span>
+<span id="cb22-7"><a href="multi-state-model-1.html#cb22-7" tabindex="-1"></a>popname_matches</span></code></pre></div>
+<pre><code>##  [1] &quot;Black Butte&quot;      &quot;Imnaha&quot;           &quot;Lostine&quot;          &quot;Redbird&quot;         
+##  [5] &quot;Wenaha&quot;           &quot;Asotin&quot;           &quot;Big Canyon&quot;       &quot;Mountain View&quot;   
+##  [9] &quot;Tucannon&quot;         &quot;Muir&quot;             &quot;UHC-ID&quot;           &quot;UHC-OR&quot;          
+## [13] &quot;LowerHellsCanyon&quot; &quot;Upper Saddle&quot;</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="multi-state-model-1.html#cb24-1" tabindex="-1"></a><span class="co"># populations that still don&#39;t match:</span></span>
+<span id="cb24-2"><a href="multi-state-model-1.html#cb24-2" tabindex="-1"></a>popname_inshpnotloc <span class="ot">&lt;-</span> shp_popnames[<span class="sc">-</span><span class="fu">which</span>(shp_popnames <span class="sc">%in%</span> loc_popnames)]</span>
+<span id="cb24-3"><a href="multi-state-model-1.html#cb24-3" tabindex="-1"></a>popname_inshpnotloc</span></code></pre></div>
+<pre><code>## [1] &quot;Bear Creek&quot;</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="multi-state-model-1.html#cb26-1" tabindex="-1"></a>popname_inlocnotshp <span class="ot">&lt;-</span> loc_popnames[<span class="sc">-</span><span class="fu">which</span>(loc_popnames <span class="sc">%in%</span> shp_popnames)]</span>
+<span id="cb26-2"><a href="multi-state-model-1.html#cb26-2" tabindex="-1"></a>popname_inlocnotshp</span></code></pre></div>
+<pre><code>## [1] &quot;Minam&quot;          &quot;Sheep Divide&quot;   &quot;Quartz&quot;         &quot;Myers&quot;         
+## [5] &quot;05IMREL&quot;        &quot;Sheep Mountain&quot; &quot;McGraw&quot;</code></pre>
+<p>Bear Creek is a population in the shapefile that does not have a match in the location data.
+Minam, Sheep Divide, Quartz, Myers, 05IMREL, Sheep Mountain, and McGraw are population names in the location data that do not have a population match in the shapefile. Before finalizing the multi-state model we will check whether we can get data or clarification on the status of these populations, but for now we will simply remove the location data of individuals assigned to these populations:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="multi-state-model-1.html#cb28-1" tabindex="-1"></a><span class="co"># Remove individuals from populations not in shapefile from the location dataset ----</span></span>
+<span id="cb28-2"><a href="multi-state-model-1.html#cb28-2" tabindex="-1"></a>nonsf_dat <span class="ot">&lt;-</span> nonsf_dat[<span class="fu">which</span>(nonsf_dat<span class="sc">$</span>POPULATION <span class="sc">%in%</span> popn_ranges<span class="sc">$</span>Population),]</span></code></pre></div>
+<p>We will also remove any individuals that were translocated from the dataset before we assign our states and state-switches because we expect their movement patterns to be different than those of resident sheep, and for now we just want to look at the more “typical” movements of resident sheep in our analysis.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="multi-state-model-1.html#cb29-1" tabindex="-1"></a><span class="co"># Remove translocated individuals from the datasets ----</span></span>
+<span id="cb29-2"><a href="multi-state-model-1.html#cb29-2" tabindex="-1"></a>nonsf_dat <span class="ot">&lt;-</span> nonsf_dat[<span class="fu">which</span>(nonsf_dat<span class="sc">$</span>SOURCE <span class="sc">==</span> <span class="st">&quot;R&quot;</span>),]</span></code></pre></div>
+</div>
+<div id="set-location-data-and-shapefile-to-same-coordinate-reference-system-crs" class="section level4 hasAnchor" number="3.1.2.2">
+<h4><span class="header-section-number">3.1.2.2</span> Set location data and shapefile to same coordinate reference system (CRS)<a href="multi-state-model-1.html#set-location-data-and-shapefile-to-same-coordinate-reference-system-crs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Here we format the location data and shapefile so that they align correctly spatially.</p>
+<p>I first create the new object dat so that we have both an sf data object (dat)
+as well as a non-sf data object (nonsf_dat); I do this so that we have the location data in the spatial format used by R for spatial calculations and plotting, and retain the the nonsf_dat object so that the path connecting the locations can later be added to plots using ggplot2::geom_path.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="multi-state-model-1.html#cb30-1" tabindex="-1"></a><span class="co"># turn location data frame into a sf object:</span></span>
+<span id="cb30-2"><a href="multi-state-model-1.html#cb30-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(nonsf_dat, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;x_&quot;</span>, <span class="st">&quot;y_&quot;</span>), <span class="at">crs =</span> <span class="dv">32611</span>)</span></code></pre></div>
+<p>Now I set the CRS of the population ranges shapefile and location data points to match:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="multi-state-model-1.html#cb31-1" tabindex="-1"></a><span class="co"># check CRS of each data source</span></span>
+<span id="cb31-2"><a href="multi-state-model-1.html#cb31-2" tabindex="-1"></a><span class="fu">st_crs</span>(popn_ranges)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+##   User input: NAD83 / UTM zone 11N 
+##   wkt:
+## PROJCRS[&quot;NAD83 / UTM zone 11N&quot;,
+##     BASEGEOGCRS[&quot;NAD83&quot;,
+##         DATUM[&quot;North American Datum 1983&quot;,
+##             ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+##                 LENGTHUNIT[&quot;metre&quot;,1]]],
+##         PRIMEM[&quot;Greenwich&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##         ID[&quot;EPSG&quot;,4269]],
+##     CONVERSION[&quot;UTM zone 11N&quot;,
+##         METHOD[&quot;Transverse Mercator&quot;,
+##             ID[&quot;EPSG&quot;,9807]],
+##         PARAMETER[&quot;Latitude of natural origin&quot;,0,
+##             ANGLEUNIT[&quot;Degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8801]],
+##         PARAMETER[&quot;Longitude of natural origin&quot;,-117,
+##             ANGLEUNIT[&quot;Degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8802]],
+##         PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,
+##             SCALEUNIT[&quot;unity&quot;,1],
+##             ID[&quot;EPSG&quot;,8805]],
+##         PARAMETER[&quot;False easting&quot;,500000,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8806]],
+##         PARAMETER[&quot;False northing&quot;,0,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8807]]],
+##     CS[Cartesian,2],
+##         AXIS[&quot;(E)&quot;,east,
+##             ORDER[1],
+##             LENGTHUNIT[&quot;metre&quot;,1]],
+##         AXIS[&quot;(N)&quot;,north,
+##             ORDER[2],
+##             LENGTHUNIT[&quot;metre&quot;,1]],
+##     ID[&quot;EPSG&quot;,26911]]</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="multi-state-model-1.html#cb33-1" tabindex="-1"></a><span class="fu">st_crs</span>(dat) </span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+##   User input: EPSG:32611 
+##   wkt:
+## PROJCRS[&quot;WGS 84 / UTM zone 11N&quot;,
+##     BASEGEOGCRS[&quot;WGS 84&quot;,
+##         ENSEMBLE[&quot;World Geodetic System 1984 ensemble&quot;,
+##             MEMBER[&quot;World Geodetic System 1984 (Transit)&quot;],
+##             MEMBER[&quot;World Geodetic System 1984 (G730)&quot;],
+##             MEMBER[&quot;World Geodetic System 1984 (G873)&quot;],
+##             MEMBER[&quot;World Geodetic System 1984 (G1150)&quot;],
+##             MEMBER[&quot;World Geodetic System 1984 (G1674)&quot;],
+##             MEMBER[&quot;World Geodetic System 1984 (G1762)&quot;],
+##             MEMBER[&quot;World Geodetic System 1984 (G2139)&quot;],
+##             ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,
+##                 LENGTHUNIT[&quot;metre&quot;,1]],
+##             ENSEMBLEACCURACY[2.0]],
+##         PRIMEM[&quot;Greenwich&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##         ID[&quot;EPSG&quot;,4326]],
+##     CONVERSION[&quot;UTM zone 11N&quot;,
+##         METHOD[&quot;Transverse Mercator&quot;,
+##             ID[&quot;EPSG&quot;,9807]],
+##         PARAMETER[&quot;Latitude of natural origin&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8801]],
+##         PARAMETER[&quot;Longitude of natural origin&quot;,-117,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8802]],
+##         PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,
+##             SCALEUNIT[&quot;unity&quot;,1],
+##             ID[&quot;EPSG&quot;,8805]],
+##         PARAMETER[&quot;False easting&quot;,500000,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8806]],
+##         PARAMETER[&quot;False northing&quot;,0,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8807]]],
+##     CS[Cartesian,2],
+##         AXIS[&quot;(E)&quot;,east,
+##             ORDER[1],
+##             LENGTHUNIT[&quot;metre&quot;,1]],
+##         AXIS[&quot;(N)&quot;,north,
+##             ORDER[2],
+##             LENGTHUNIT[&quot;metre&quot;,1]],
+##     USAGE[
+##         SCOPE[&quot;Navigation and medium accuracy spatial referencing.&quot;],
+##         AREA[&quot;Between 120°W and 114°W, northern hemisphere between equator and 84°N, onshore and offshore. Canada - Alberta; British Columbia (BC); Northwest Territories (NWT); Nunavut. Mexico. United States (USA).&quot;],
+##         BBOX[0,-120,84,-114]],
+##     ID[&quot;EPSG&quot;,32611]]</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="multi-state-model-1.html#cb35-1" tabindex="-1"></a><span class="co"># update shapefile CRS to match location data points CRS</span></span>
+<span id="cb35-2"><a href="multi-state-model-1.html#cb35-2" tabindex="-1"></a>popn_ranges <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(popn_ranges, <span class="at">crs =</span> <span class="dv">32611</span>)</span>
+<span id="cb35-3"><a href="multi-state-model-1.html#cb35-3" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="multi-state-model-1.html#cb35-4" tabindex="-1"></a><span class="co"># check that the above worked appropriately</span></span>
+<span id="cb35-5"><a href="multi-state-model-1.html#cb35-5" tabindex="-1"></a><span class="fu">st_crs</span>(dat)<span class="sc">==</span><span class="fu">st_crs</span>(popn_ranges) </span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div id="state-assignment" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> State assignment<a href="multi-state-model-1.html#state-assignment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Assign each bighorn sheep location to a state indicating if the individual
+was located within its own home population range (state = home),
+within an other population range that is not its home population range
+(state = other), or was not located in any known bighorn sheep population
+range (state = transit).</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="multi-state-model-1.html#cb37-1" tabindex="-1"></a><span class="co"># for each location, report which population range polygon (if any) it&#39;s in</span></span>
+<span id="cb37-2"><a href="multi-state-model-1.html#cb37-2" tabindex="-1"></a>polygon_in <span class="ot">&lt;-</span> <span class="fu">st_intersects</span>(dat, popn_ranges)</span>
+<span id="cb37-3"><a href="multi-state-model-1.html#cb37-3" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="multi-state-model-1.html#cb37-4" tabindex="-1"></a><span class="co"># add the polygon a location is in as a column to the data</span></span>
+<span id="cb37-5"><a href="multi-state-model-1.html#cb37-5" tabindex="-1"></a><span class="co"># (note: this will classify locations not in a population range polygon as NA)</span></span>
+<span id="cb37-6"><a href="multi-state-model-1.html#cb37-6" tabindex="-1"></a>dat<span class="sc">$</span>polygon_in <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(polygon_in)) </span>
+<span id="cb37-7"><a href="multi-state-model-1.html#cb37-7" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="multi-state-model-1.html#cb37-8" tabindex="-1"></a><span class="co"># report the name of the population the point was located in, </span></span>
+<span id="cb37-9"><a href="multi-state-model-1.html#cb37-9" tabindex="-1"></a><span class="co">#  or NA if it was not within any population range</span></span>
+<span id="cb37-10"><a href="multi-state-model-1.html#cb37-10" tabindex="-1"></a>dat<span class="sc">$</span>population_in <span class="ot">&lt;-</span> popn_ranges[dat<span class="sc">$</span>polygon_in, ]<span class="sc">$</span>Population</span>
+<span id="cb37-11"><a href="multi-state-model-1.html#cb37-11" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="multi-state-model-1.html#cb37-12" tabindex="-1"></a><span class="co"># create a state column </span></span>
+<span id="cb37-13"><a href="multi-state-model-1.html#cb37-13" tabindex="-1"></a><span class="co"># denoting if an individual was located in their home population, </span></span>
+<span id="cb37-14"><a href="multi-state-model-1.html#cb37-14" tabindex="-1"></a><span class="co"># in an other population, or in transit (i.e. not in any population):</span></span>
+<span id="cb37-15"><a href="multi-state-model-1.html#cb37-15" tabindex="-1"></a>dat<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb37-16"><a href="multi-state-model-1.html#cb37-16" tabindex="-1"></a>dat[<span class="fu">which</span>(dat<span class="sc">$</span>population_in<span class="sc">==</span>dat<span class="sc">$</span>POPULATION),]<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">&quot;home_population&quot;</span></span>
+<span id="cb37-17"><a href="multi-state-model-1.html#cb37-17" tabindex="-1"></a>dat[<span class="fu">which</span>(dat<span class="sc">$</span>population_in<span class="sc">!=</span>dat<span class="sc">$</span>POPULATION),]<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">&quot;other_population&quot;</span></span>
+<span id="cb37-18"><a href="multi-state-model-1.html#cb37-18" tabindex="-1"></a>dat[<span class="fu">which</span>(<span class="fu">is.na</span>(dat<span class="sc">$</span>population_in)),]<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">&quot;transit&quot;</span></span></code></pre></div>
+<p>Plot location data colored by state on top of the population ranges:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="multi-state-model-1.html#cb38-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb38-2"><a href="multi-state-model-1.html#cb38-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> popn_ranges[,<span class="dv">5</span>], <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="fu">aes</span>(<span class="at">fill =</span> Population)) <span class="sc">+</span></span>
+<span id="cb38-3"><a href="multi-state-model-1.html#cb38-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> dat, <span class="at">size =</span> <span class="dv">1</span>, <span class="fu">aes</span>(<span class="at">color =</span> state), <span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb38-4"><a href="multi-state-model-1.html#cb38-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Hells Canyon bighorn sheep locations and population ranges&quot;</span>) <span class="sc">+</span></span>
+<span id="cb38-5"><a href="multi-state-model-1.html#cb38-5" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="fl">415656.271001306</span>, <span class="fl">573522.865745345</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">4947089.96507637</span>, <span class="fl">5175432.83718414</span>)) <span class="sc">+</span> <span class="co"># set extent to match transit points</span></span>
+<span id="cb38-6"><a href="multi-state-model-1.html#cb38-6" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>()<span class="sc">+</span></span>
+<span id="cb38-7"><a href="multi-state-model-1.html#cb38-7" tabindex="-1"></a>  <span class="co">#theme_light()</span></span>
+<span id="cb38-8"><a href="multi-state-model-1.html#cb38-8" tabindex="-1"></a>  <span class="fu">theme_void</span>() </span></code></pre></div>
+<p><img src="_main_files/figure-html/plot%20locations%20colored%20by%20state-1.png" width="672" /></p>
+<p>Save the figure created above:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="multi-state-model-1.html#cb39-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;figures/population_shapefile_with_bighorn_locations_colored_by_state_alldata_2024-08.tiff&quot;</span>, </span>
+<span id="cb39-2"><a href="multi-state-model-1.html#cb39-2" tabindex="-1"></a>       <span class="at">device =</span> <span class="st">&quot;tiff&quot;</span>, </span>
+<span id="cb39-3"><a href="multi-state-model-1.html#cb39-3" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">14</span>, </span>
+<span id="cb39-4"><a href="multi-state-model-1.html#cb39-4" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">8</span>, </span>
+<span id="cb39-5"><a href="multi-state-model-1.html#cb39-5" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">&quot;in&quot;</span>, </span>
+<span id="cb39-6"><a href="multi-state-model-1.html#cb39-6" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">400</span>)</span></code></pre></div>
+<p>Examine the distribution of states in the data:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="multi-state-model-1.html#cb40-1" tabindex="-1"></a><span class="co"># number of points assigned to each state across location dataset:</span></span>
+<span id="cb40-2"><a href="multi-state-model-1.html#cb40-2" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>state)</span></code></pre></div>
+<pre><code>## 
+##  home_population other_population          transit 
+##           742317            32539           278855</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="multi-state-model-1.html#cb42-1" tabindex="-1"></a><span class="co">#proportion of locations in each state:</span></span>
+<span id="cb42-2"><a href="multi-state-model-1.html#cb42-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">table</span>(dat<span class="sc">$</span>state)<span class="sc">/</span><span class="fu">nrow</span>(dat), <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+##  home_population other_population          transit 
+##             0.70             0.03             0.26</code></pre>
+<p>Examine the distribution of states in the data by demographic group:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="multi-state-model-1.html#cb44-1" tabindex="-1"></a><span class="co"># for each demographic group (unique sex + age class combo),</span></span>
+<span id="cb44-2"><a href="multi-state-model-1.html#cb44-2" tabindex="-1"></a><span class="co"># tally the number of points in the dataset classified in each state:</span></span>
+<span id="cb44-3"><a href="multi-state-model-1.html#cb44-3" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb44-4"><a href="multi-state-model-1.html#cb44-4" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb44-5"><a href="multi-state-model-1.html#cb44-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex_age_combo =</span> <span class="fu">case_when</span>(</span>
+<span id="cb44-6"><a href="multi-state-model-1.html#cb44-6" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Adult&quot;</span> <span class="sc">~</span> <span class="st">&quot;Adult Female&quot;</span>,</span>
+<span id="cb44-7"><a href="multi-state-model-1.html#cb44-7" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Adult&quot;</span> <span class="sc">~</span> <span class="st">&quot;Adult Male&quot;</span>,</span>
+<span id="cb44-8"><a href="multi-state-model-1.html#cb44-8" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Yearling&quot;</span> <span class="sc">~</span> <span class="st">&quot;Yearling Female&quot;</span>,</span>
+<span id="cb44-9"><a href="multi-state-model-1.html#cb44-9" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Yearling&quot;</span> <span class="sc">~</span> <span class="st">&quot;Yearling Male&quot;</span>,</span>
+<span id="cb44-10"><a href="multi-state-model-1.html#cb44-10" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Lamb&quot;</span> <span class="sc">~</span> <span class="st">&quot;Lamb Female&quot;</span>,</span>
+<span id="cb44-11"><a href="multi-state-model-1.html#cb44-11" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Lamb&quot;</span> <span class="sc">~</span> <span class="st">&quot;Lamb Male&quot;</span>,</span>
+<span id="cb44-12"><a href="multi-state-model-1.html#cb44-12" tabindex="-1"></a>    <span class="fu">is.na</span>(AGECLASS) <span class="sc">&amp;</span> SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">~</span> <span class="st">&quot;Unknown Female&quot;</span>,</span>
+<span id="cb44-13"><a href="multi-state-model-1.html#cb44-13" tabindex="-1"></a>    <span class="fu">is.na</span>(AGECLASS) <span class="sc">&amp;</span> SEX <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">~</span> <span class="st">&quot;Unknown Male&quot;</span>,</span>
+<span id="cb44-14"><a href="multi-state-model-1.html#cb44-14" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-15"><a href="multi-state-model-1.html#cb44-15" tabindex="-1"></a>  <span class="fu">group_by</span>(sex_age_combo, state) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-16"><a href="multi-state-model-1.html#cb44-16" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb44-17"><a href="multi-state-model-1.html#cb44-17" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div>
+<pre><code>## # A tibble: 21 × 3
+## # Groups:   sex_age_combo [7]
+##    sex_age_combo   state                 n
+##    &lt;chr&gt;           &lt;chr&gt;             &lt;int&gt;
+##  1 Adult Female    home_population  469785
+##  2 Adult Female    transit          233509
+##  3 Adult Male      home_population  186710
+##  4 Adult Male      transit           26708
+##  5 Yearling Female home_population   24801
+##  6 Lamb Female     home_population   24595
+##  7 Lamb Male       home_population   18854
+##  8 Adult Male      other_population  17925
+##  9 Yearling Male   home_population   17278
+## 10 Adult Female    other_population   7964
+## # ℹ 11 more rows</code></pre>
+</div>
+<div id="state-switches" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> State-switches<a href="multi-state-model-1.html#state-switches" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For each individual bighorn sheep in the movement dataset track the state transitions they make (if any).
+Do this by checking if the end location of each movement step is in a different state than the start location of the step.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="multi-state-model-1.html#cb46-1" tabindex="-1"></a><span class="co"># Add the state switch information to the dataset</span></span>
+<span id="cb46-2"><a href="multi-state-model-1.html#cb46-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>ANIMALID), <span class="cf">function</span>(x){</span>
+<span id="cb46-3"><a href="multi-state-model-1.html#cb46-3" tabindex="-1"></a>  ind_dat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>ANIMALID<span class="sc">==</span>x),]</span>
+<span id="cb46-4"><a href="multi-state-model-1.html#cb46-4" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(ind_dat) <span class="sc">&gt;</span> <span class="dv">1</span>){</span>
+<span id="cb46-5"><a href="multi-state-model-1.html#cb46-5" tabindex="-1"></a>  state_switches <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;c&quot;</span>, <span class="fu">lapply</span>(<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(ind_dat), <span class="cf">function</span>(y){</span>
+<span id="cb46-6"><a href="multi-state-model-1.html#cb46-6" tabindex="-1"></a>    current_state <span class="ot">&lt;-</span> ind_dat<span class="sc">$</span>state[y]</span>
+<span id="cb46-7"><a href="multi-state-model-1.html#cb46-7" tabindex="-1"></a>    previous_state <span class="ot">&lt;-</span> ind_dat<span class="sc">$</span>state[y<span class="dv">-1</span>]</span>
+<span id="cb46-8"><a href="multi-state-model-1.html#cb46-8" tabindex="-1"></a>    <span class="cf">if</span> (current_state <span class="sc">==</span> previous_state) {state_switch <span class="ot">&lt;-</span> <span class="st">&quot;no&quot;</span>} <span class="cf">else</span> {</span>
+<span id="cb46-9"><a href="multi-state-model-1.html#cb46-9" tabindex="-1"></a>      <span class="co"># specify the type of state switch</span></span>
+<span id="cb46-10"><a href="multi-state-model-1.html#cb46-10" tabindex="-1"></a>      state_switch <span class="ot">&lt;-</span> <span class="fu">paste0</span>(previous_state, <span class="st">&quot;_to_&quot;</span>, current_state)}</span>
+<span id="cb46-11"><a href="multi-state-model-1.html#cb46-11" tabindex="-1"></a>      <span class="fu">return</span>(state_switch)</span>
+<span id="cb46-12"><a href="multi-state-model-1.html#cb46-12" tabindex="-1"></a>  }))</span>
+<span id="cb46-13"><a href="multi-state-model-1.html#cb46-13" tabindex="-1"></a>  ind_dat<span class="sc">$</span>state_switches <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, state_switches) <span class="co"># NA for 1st point </span></span>
+<span id="cb46-14"><a href="multi-state-model-1.html#cb46-14" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb46-15"><a href="multi-state-model-1.html#cb46-15" tabindex="-1"></a>    ind_dat<span class="sc">$</span>state_switches <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb46-16"><a href="multi-state-model-1.html#cb46-16" tabindex="-1"></a>  }</span>
+<span id="cb46-17"><a href="multi-state-model-1.html#cb46-17" tabindex="-1"></a>  <span class="fu">return</span>(ind_dat)</span>
+<span id="cb46-18"><a href="multi-state-model-1.html#cb46-18" tabindex="-1"></a>}))</span></code></pre></div>
+<p>Examine the total number of each state-switch hype in the data, as well as the proportion of each state-switch type in the data</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="multi-state-model-1.html#cb47-1" tabindex="-1"></a><span class="co"># total number of state switches in data set:</span></span>
+<span id="cb47-2"><a href="multi-state-model-1.html#cb47-2" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>state_switches)</span></code></pre></div>
+<pre><code>## 
+## home_population_to_other_population          home_population_to_transit 
+##                                2523                               12522 
+##                                  no other_population_to_home_population 
+##                             1021550                                2487 
+##         other_population_to_transit          transit_to_home_population 
+##                                 552                               12472 
+##         transit_to_other_population 
+##                                 552</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="multi-state-model-1.html#cb49-1" tabindex="-1"></a><span class="co"># percentage of state switches in data set:</span></span>
+<span id="cb49-2"><a href="multi-state-model-1.html#cb49-2" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">table</span>(dat[<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(dat<span class="sc">$</span>state_switches)),]<span class="sc">$</span>state_switches)<span class="sc">/</span><span class="fu">nrow</span>(dat[<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(dat<span class="sc">$</span>state_switches)),]))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+## home_population_to_other_population          home_population_to_transit 
+##                                0.24                                1.19 
+##                                  no other_population_to_home_population 
+##                               97.04                                0.24 
+##         other_population_to_transit          transit_to_home_population 
+##                                0.05                                1.18 
+##         transit_to_other_population 
+##                                0.05</code></pre>
+<p>For each demographic group (unique sex + age class combo), tally the number of points in the dataset classified as each state-switch type:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="multi-state-model-1.html#cb51-1" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="multi-state-model-1.html#cb51-2" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb51-3"><a href="multi-state-model-1.html#cb51-3" tabindex="-1"></a>  <span class="co"># remove NA state_switches corresponding to first location of each individual</span></span>
+<span id="cb51-4"><a href="multi-state-model-1.html#cb51-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(state_switches)) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-5"><a href="multi-state-model-1.html#cb51-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex_age_combo =</span> <span class="fu">case_when</span>(</span>
+<span id="cb51-6"><a href="multi-state-model-1.html#cb51-6" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Adult&quot;</span> <span class="sc">~</span> <span class="st">&quot;Adult Female&quot;</span>,</span>
+<span id="cb51-7"><a href="multi-state-model-1.html#cb51-7" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Adult&quot;</span> <span class="sc">~</span> <span class="st">&quot;Adult Male&quot;</span>,</span>
+<span id="cb51-8"><a href="multi-state-model-1.html#cb51-8" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Yearling&quot;</span> <span class="sc">~</span> <span class="st">&quot;Yearling Female&quot;</span>,</span>
+<span id="cb51-9"><a href="multi-state-model-1.html#cb51-9" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Yearling&quot;</span> <span class="sc">~</span> <span class="st">&quot;Yearling Male&quot;</span>,</span>
+<span id="cb51-10"><a href="multi-state-model-1.html#cb51-10" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Lamb&quot;</span> <span class="sc">~</span> <span class="st">&quot;Lamb Female&quot;</span>,</span>
+<span id="cb51-11"><a href="multi-state-model-1.html#cb51-11" tabindex="-1"></a>    SEX <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> AGECLASS <span class="sc">==</span> <span class="st">&quot;Lamb&quot;</span> <span class="sc">~</span> <span class="st">&quot;Lamb Male&quot;</span>,</span>
+<span id="cb51-12"><a href="multi-state-model-1.html#cb51-12" tabindex="-1"></a>    <span class="fu">is.na</span>(AGECLASS) <span class="sc">&amp;</span> SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">~</span> <span class="st">&quot;Unknown Female&quot;</span>,</span>
+<span id="cb51-13"><a href="multi-state-model-1.html#cb51-13" tabindex="-1"></a>    <span class="fu">is.na</span>(AGECLASS) <span class="sc">&amp;</span> SEX <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">~</span> <span class="st">&quot;Unknown Male&quot;</span>,</span>
+<span id="cb51-14"><a href="multi-state-model-1.html#cb51-14" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-15"><a href="multi-state-model-1.html#cb51-15" tabindex="-1"></a>  <span class="fu">group_by</span>(sex_age_combo, state_switches) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-16"><a href="multi-state-model-1.html#cb51-16" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb51-17"><a href="multi-state-model-1.html#cb51-17" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div>
+<pre><code>## # A tibble: 45 × 3
+## # Groups:   sex_age_combo [7]
+##    sex_age_combo   state_switches                  n
+##    &lt;chr&gt;           &lt;chr&gt;                       &lt;int&gt;
+##  1 Adult Female    no                         690180
+##  2 Adult Male      no                         223201
+##  3 Yearling Female no                          29985
+##  4 Lamb Female     no                          28952
+##  5 Lamb Male       no                          26753
+##  6 Yearling Male   no                          22188
+##  7 Adult Female    home_population_to_transit   8465
+##  8 Adult Female    transit_to_home_population   8425
+##  9 Adult Male      home_population_to_transit   3050
+## 10 Adult Male      transit_to_home_population   3037
+## # ℹ 35 more rows</code></pre>
+</div>
+<div id="create-additional-summary-data" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Create additional summary data<a href="multi-state-model-1.html#create-additional-summary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For each individual, tally the number of populations they were in and the number of state switches in their data:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="multi-state-model-1.html#cb53-1" tabindex="-1"></a><span class="co"># split data by individual</span></span>
+<span id="cb53-2"><a href="multi-state-model-1.html#cb53-2" tabindex="-1"></a>dats <span class="ot">&lt;-</span> <span class="fu">split</span>(dat, dat<span class="sc">$</span>ANIMALID)</span>
+<span id="cb53-3"><a href="multi-state-model-1.html#cb53-3" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="multi-state-model-1.html#cb53-4" tabindex="-1"></a><span class="co"># tally the number of populations each individual was in and number of state switches</span></span>
+<span id="cb53-5"><a href="multi-state-model-1.html#cb53-5" tabindex="-1"></a>popns_in <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dats), <span class="cf">function</span>(x){</span>
+<span id="cb53-6"><a href="multi-state-model-1.html#cb53-6" tabindex="-1"></a>  ind_dat <span class="ot">&lt;-</span> dats[[x]]</span>
+<span id="cb53-7"><a href="multi-state-model-1.html#cb53-7" tabindex="-1"></a>  tot_popns <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(ind_dat<span class="sc">$</span>population_in[<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(ind_dat<span class="sc">$</span>population_in))]))</span>
+<span id="cb53-8"><a href="multi-state-model-1.html#cb53-8" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">is.na</span>(ind_dat<span class="sc">$</span>population_in))) {in_transit <span class="ot">&lt;-</span> T} <span class="cf">else</span> {in_transit <span class="ot">&lt;-</span> F}</span>
+<span id="cb53-9"><a href="multi-state-model-1.html#cb53-9" tabindex="-1"></a>  tot_popns_and_transit <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(ind_dat<span class="sc">$</span>population_in))</span>
+<span id="cb53-10"><a href="multi-state-model-1.html#cb53-10" tabindex="-1"></a>  all_popns_in <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">unique</span>(ind_dat<span class="sc">$</span>population_in[<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(ind_dat<span class="sc">$</span>population_in))]), <span class="at">collapse=</span><span class="st">&quot;; &quot;</span>)</span>
+<span id="cb53-11"><a href="multi-state-model-1.html#cb53-11" tabindex="-1"></a>  start_date <span class="ot">&lt;-</span> <span class="fu">min</span>(ind_dat<span class="sc">$</span>datetime)</span>
+<span id="cb53-12"><a href="multi-state-model-1.html#cb53-12" tabindex="-1"></a>  end_date <span class="ot">&lt;-</span> <span class="fu">max</span>(ind_dat<span class="sc">$</span>datetime)</span>
+<span id="cb53-13"><a href="multi-state-model-1.html#cb53-13" tabindex="-1"></a>  time_tracked <span class="ot">&lt;-</span> <span class="fu">difftime</span>(end_date, start_date)</span>
+<span id="cb53-14"><a href="multi-state-model-1.html#cb53-14" tabindex="-1"></a>  <span class="co"># tally state switches</span></span>
+<span id="cb53-15"><a href="multi-state-model-1.html#cb53-15" tabindex="-1"></a>  total_state_switches <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">intersect</span>(<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(ind_dat<span class="sc">$</span>state_switches)), </span>
+<span id="cb53-16"><a href="multi-state-model-1.html#cb53-16" tabindex="-1"></a>                                                 <span class="fu">which</span>(ind_dat<span class="sc">$</span>state_switches<span class="sc">!=</span><span class="st">&quot;no&quot;</span>)))</span>
+<span id="cb53-17"><a href="multi-state-model-1.html#cb53-17" tabindex="-1"></a>  total_home_to_transit <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(ind_dat<span class="sc">$</span>state_switches <span class="sc">==</span> <span class="st">&quot;home_population_to_transit&quot;</span>))</span>
+<span id="cb53-18"><a href="multi-state-model-1.html#cb53-18" tabindex="-1"></a>  total_home_to_other <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(ind_dat<span class="sc">$</span>state_switches <span class="sc">==</span> <span class="st">&quot;home_population_to_other_population&quot;</span>))</span>
+<span id="cb53-19"><a href="multi-state-model-1.html#cb53-19" tabindex="-1"></a>  total_transit_to_home <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(ind_dat<span class="sc">$</span>state_switches <span class="sc">==</span> <span class="st">&quot;transit_to_home_population&quot;</span>))</span>
+<span id="cb53-20"><a href="multi-state-model-1.html#cb53-20" tabindex="-1"></a>  total_transit_to_other <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(ind_dat<span class="sc">$</span>state_switches <span class="sc">==</span> <span class="st">&quot;transit_to_other_population&quot;</span>))</span>
+<span id="cb53-21"><a href="multi-state-model-1.html#cb53-21" tabindex="-1"></a>  total_other_to_home <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(ind_dat<span class="sc">$</span>state_switches <span class="sc">==</span> <span class="st">&quot;other_population_to_home_population&quot;</span>))</span>
+<span id="cb53-22"><a href="multi-state-model-1.html#cb53-22" tabindex="-1"></a>  total_other_to_transit <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(ind_dat<span class="sc">$</span>state_switches <span class="sc">==</span> <span class="st">&quot;other_population_to_transit&quot;</span>))</span>
+<span id="cb53-23"><a href="multi-state-model-1.html#cb53-23" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">animalID=</span><span class="fu">unique</span>(ind_dat<span class="sc">$</span>ANIMALID), </span>
+<span id="cb53-24"><a href="multi-state-model-1.html#cb53-24" tabindex="-1"></a>                    <span class="at">source=</span><span class="fu">paste0</span>(<span class="fu">unique</span>(ind_dat<span class="sc">$</span>SOURCE), <span class="at">collapse=</span><span class="st">&quot;; &quot;</span>),</span>
+<span id="cb53-25"><a href="multi-state-model-1.html#cb53-25" tabindex="-1"></a>                    <span class="at">home_popn=</span> <span class="fu">unique</span>(ind_dat<span class="sc">$</span>POPULATION),</span>
+<span id="cb53-26"><a href="multi-state-model-1.html#cb53-26" tabindex="-1"></a>                    <span class="at">tot_popns=</span>tot_popns, </span>
+<span id="cb53-27"><a href="multi-state-model-1.html#cb53-27" tabindex="-1"></a>                    <span class="at">in_transit =</span> in_transit,</span>
+<span id="cb53-28"><a href="multi-state-model-1.html#cb53-28" tabindex="-1"></a>                    <span class="at">tot_popns_and_transit=</span>tot_popns_and_transit,</span>
+<span id="cb53-29"><a href="multi-state-model-1.html#cb53-29" tabindex="-1"></a>                    <span class="at">all_popns_in=</span>all_popns_in,</span>
+<span id="cb53-30"><a href="multi-state-model-1.html#cb53-30" tabindex="-1"></a>                    <span class="at">total_state_switches=</span>total_state_switches,</span>
+<span id="cb53-31"><a href="multi-state-model-1.html#cb53-31" tabindex="-1"></a>                    <span class="at">total_home_to_transit=</span>total_home_to_transit,</span>
+<span id="cb53-32"><a href="multi-state-model-1.html#cb53-32" tabindex="-1"></a>                    <span class="at">total_home_to_other=</span>total_home_to_other,</span>
+<span id="cb53-33"><a href="multi-state-model-1.html#cb53-33" tabindex="-1"></a>                    <span class="at">total_transit_to_home=</span>total_transit_to_home,</span>
+<span id="cb53-34"><a href="multi-state-model-1.html#cb53-34" tabindex="-1"></a>                    <span class="at">total_transit_to_other=</span>total_transit_to_other,</span>
+<span id="cb53-35"><a href="multi-state-model-1.html#cb53-35" tabindex="-1"></a>                    <span class="at">total_other_to_home=</span>total_other_to_home,</span>
+<span id="cb53-36"><a href="multi-state-model-1.html#cb53-36" tabindex="-1"></a>                    <span class="at">total_other_to_transit=</span>total_other_to_transit,</span>
+<span id="cb53-37"><a href="multi-state-model-1.html#cb53-37" tabindex="-1"></a>                    <span class="at">start_date=</span>start_date, </span>
+<span id="cb53-38"><a href="multi-state-model-1.html#cb53-38" tabindex="-1"></a>                    <span class="at">end_date=</span>end_date, </span>
+<span id="cb53-39"><a href="multi-state-model-1.html#cb53-39" tabindex="-1"></a>                    <span class="at">time_tracked=</span>time_tracked,</span>
+<span id="cb53-40"><a href="multi-state-model-1.html#cb53-40" tabindex="-1"></a>                    <span class="at">switches_per_year=</span><span class="fu">round</span>(total_state_switches<span class="sc">/</span>(<span class="fu">as.numeric</span>(time_tracked)<span class="sc">/</span><span class="fl">365.25</span>), <span class="dv">1</span>)))</span>
+<span id="cb53-41"><a href="multi-state-model-1.html#cb53-41" tabindex="-1"></a>}))</span>
+<span id="cb53-42"><a href="multi-state-model-1.html#cb53-42" tabindex="-1"></a></span>
+<span id="cb53-43"><a href="multi-state-model-1.html#cb53-43" tabindex="-1"></a><span class="co"># examine the first few rows of the summary data frame</span></span>
+<span id="cb53-44"><a href="multi-state-model-1.html#cb53-44" tabindex="-1"></a><span class="fu">head</span>(popns_in)</span></code></pre></div>
+<pre><code>##   animalID source   home_popn tot_popns in_transit tot_popns_and_transit
+## 1    00B14      R Black Butte         1       TRUE                     2
+## 2    00B15      R Black Butte         1      FALSE                     1
+## 3    00B16      R Black Butte         1       TRUE                     2
+## 4    00B17      R Black Butte         1       TRUE                     2
+## 5    00B19      R Black Butte         3       TRUE                     4
+## 6    00I37      R      Imnaha         2      FALSE                     2
+##                          all_popns_in total_state_switches
+## 1                         Black Butte                    6
+## 2                         Black Butte                    0
+## 3                         Black Butte                    6
+## 4                         Black Butte                    4
+## 5 Black Butte; Mountain View; Redbird                    6
+## 6            Imnaha; LowerHellsCanyon                    2
+##   total_home_to_transit total_home_to_other total_transit_to_home
+## 1                     3                   0                     3
+## 2                     0                   0                     0
+## 3                     3                   0                     3
+## 4                     2                   0                     2
+## 5                     1                   2                     1
+## 6                     0                   1                     0
+##   total_transit_to_other total_other_to_home total_other_to_transit
+## 1                      0                   0                      0
+## 2                      0                   0                      0
+## 3                      0                   0                      0
+## 4                      0                   0                      0
+## 5                      0                   2                      0
+## 6                      0                   1                      0
+##            start_date            end_date   time_tracked switches_per_year
+## 1 2000-02-15 09:50:00 2002-11-07 13:00:00  996.1319 days               2.2
+## 2 2000-02-15 10:40:00 2003-05-23 10:25:00 1192.9479 days               0.0
+## 3 2000-02-15 09:50:00 2002-04-17 09:40:00  791.9514 days               2.8
+## 4 2000-02-15 12:45:00 2003-05-23 10:20:00 1192.8576 days               1.2
+## 5 2000-02-15 10:40:00 2003-02-19 10:38:00 1099.9986 days               2.0
+## 6 2000-02-02 10:40:00 2000-12-04 16:15:00  306.2326 days               2.4</code></pre>
+<p>Calculate the proportion of states by different grouping variables:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="multi-state-model-1.html#cb55-1" tabindex="-1"></a><span class="co"># make age and sex ordered factor levels</span></span>
+<span id="cb55-2"><a href="multi-state-model-1.html#cb55-2" tabindex="-1"></a>dat<span class="sc">$</span>SEX <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>SEX, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>))</span>
+<span id="cb55-3"><a href="multi-state-model-1.html#cb55-3" tabindex="-1"></a>dat<span class="sc">$</span>AGECLASS <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>AGECLASS, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;Adult&quot;</span>, <span class="st">&quot;Yearling&quot;</span>, <span class="st">&quot;Lamb&quot;</span>))</span>
+<span id="cb55-4"><a href="multi-state-model-1.html#cb55-4" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="multi-state-model-1.html#cb55-5" tabindex="-1"></a><span class="co"># create an age_sex column on dat that combines age class and sex</span></span>
+<span id="cb55-6"><a href="multi-state-model-1.html#cb55-6" tabindex="-1"></a>dat<span class="sc">$</span>agesex <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">paste0</span>(<span class="fu">substr</span>(dat<span class="sc">$</span>AGECLASS, <span class="dv">1</span>, <span class="dv">1</span>), dat<span class="sc">$</span>SEX),</span>
+<span id="cb55-7"><a href="multi-state-model-1.html#cb55-7" tabindex="-1"></a>                     <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;AF&quot;</span>, <span class="st">&quot;AM&quot;</span>, <span class="st">&quot;YF&quot;</span>, <span class="st">&quot;YM&quot;</span>, <span class="st">&quot;LF&quot;</span>, <span class="st">&quot;LM&quot;</span>))</span>
+<span id="cb55-8"><a href="multi-state-model-1.html#cb55-8" tabindex="-1"></a></span>
+<span id="cb55-9"><a href="multi-state-model-1.html#cb55-9" tabindex="-1"></a><span class="co"># proportion of states by age:</span></span>
+<span id="cb55-10"><a href="multi-state-model-1.html#cb55-10" tabindex="-1"></a>stateswitch_byage <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>AGECLASS), <span class="cf">function</span>(x){</span>
+<span id="cb55-11"><a href="multi-state-model-1.html#cb55-11" tabindex="-1"></a>  agedat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>AGECLASS<span class="sc">==</span>x),]</span>
+<span id="cb55-12"><a href="multi-state-model-1.html#cb55-12" tabindex="-1"></a>  percent_home <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-13"><a href="multi-state-model-1.html#cb55-13" tabindex="-1"></a>  percent_other <span class="ot">&lt;-</span><span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-14"><a href="multi-state-model-1.html#cb55-14" tabindex="-1"></a>  percent_transit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-15"><a href="multi-state-model-1.html#cb55-15" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">age_class=</span>x,</span>
+<span id="cb55-16"><a href="multi-state-model-1.html#cb55-16" tabindex="-1"></a>                    <span class="at">percent_home=</span>percent_home,</span>
+<span id="cb55-17"><a href="multi-state-model-1.html#cb55-17" tabindex="-1"></a>                    <span class="at">percent_transit=</span>percent_transit,</span>
+<span id="cb55-18"><a href="multi-state-model-1.html#cb55-18" tabindex="-1"></a>                    <span class="at">percent_other=</span>percent_other))</span>
+<span id="cb55-19"><a href="multi-state-model-1.html#cb55-19" tabindex="-1"></a>}))</span>
+<span id="cb55-20"><a href="multi-state-model-1.html#cb55-20" tabindex="-1"></a></span>
+<span id="cb55-21"><a href="multi-state-model-1.html#cb55-21" tabindex="-1"></a><span class="co"># proportion of states by sex:</span></span>
+<span id="cb55-22"><a href="multi-state-model-1.html#cb55-22" tabindex="-1"></a>stateswitch_bysex <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>SEX), <span class="cf">function</span>(x){</span>
+<span id="cb55-23"><a href="multi-state-model-1.html#cb55-23" tabindex="-1"></a>  sexdat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>SEX<span class="sc">==</span>x),]</span>
+<span id="cb55-24"><a href="multi-state-model-1.html#cb55-24" tabindex="-1"></a>  percent_home <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-25"><a href="multi-state-model-1.html#cb55-25" tabindex="-1"></a>  percent_other <span class="ot">&lt;-</span><span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-26"><a href="multi-state-model-1.html#cb55-26" tabindex="-1"></a>  percent_transit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-27"><a href="multi-state-model-1.html#cb55-27" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">sex=</span>x,</span>
+<span id="cb55-28"><a href="multi-state-model-1.html#cb55-28" tabindex="-1"></a>                    <span class="at">percent_home=</span>percent_home,</span>
+<span id="cb55-29"><a href="multi-state-model-1.html#cb55-29" tabindex="-1"></a>                    <span class="at">percent_transit=</span>percent_transit,</span>
+<span id="cb55-30"><a href="multi-state-model-1.html#cb55-30" tabindex="-1"></a>                    <span class="at">percent_other=</span>percent_other))</span>
+<span id="cb55-31"><a href="multi-state-model-1.html#cb55-31" tabindex="-1"></a>}))</span>
+<span id="cb55-32"><a href="multi-state-model-1.html#cb55-32" tabindex="-1"></a></span>
+<span id="cb55-33"><a href="multi-state-model-1.html#cb55-33" tabindex="-1"></a><span class="co"># proportion of states by sex + age combo:</span></span>
+<span id="cb55-34"><a href="multi-state-model-1.html#cb55-34" tabindex="-1"></a>stateswitch_byagesex <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>agesex), <span class="cf">function</span>(x){</span>
+<span id="cb55-35"><a href="multi-state-model-1.html#cb55-35" tabindex="-1"></a>  agesexdat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>agesex<span class="sc">==</span>x),]</span>
+<span id="cb55-36"><a href="multi-state-model-1.html#cb55-36" tabindex="-1"></a>  percent_home <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-37"><a href="multi-state-model-1.html#cb55-37" tabindex="-1"></a>  percent_other <span class="ot">&lt;-</span><span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-38"><a href="multi-state-model-1.html#cb55-38" tabindex="-1"></a>  percent_transit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-39"><a href="multi-state-model-1.html#cb55-39" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">agesex=</span>x,</span>
+<span id="cb55-40"><a href="multi-state-model-1.html#cb55-40" tabindex="-1"></a>                    <span class="at">percent_home=</span>percent_home,</span>
+<span id="cb55-41"><a href="multi-state-model-1.html#cb55-41" tabindex="-1"></a>                    <span class="at">percent_transit=</span>percent_transit,</span>
+<span id="cb55-42"><a href="multi-state-model-1.html#cb55-42" tabindex="-1"></a>                    <span class="at">percent_other=</span>percent_other))</span>
+<span id="cb55-43"><a href="multi-state-model-1.html#cb55-43" tabindex="-1"></a>}))</span>
+<span id="cb55-44"><a href="multi-state-model-1.html#cb55-44" tabindex="-1"></a></span>
+<span id="cb55-45"><a href="multi-state-model-1.html#cb55-45" tabindex="-1"></a><span class="co"># proportion of states by home population:</span></span>
+<span id="cb55-46"><a href="multi-state-model-1.html#cb55-46" tabindex="-1"></a>stateswitch_byhome <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>POPULATION), <span class="cf">function</span>(x){</span>
+<span id="cb55-47"><a href="multi-state-model-1.html#cb55-47" tabindex="-1"></a>  popndat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>POPULATION<span class="sc">==</span>x),]</span>
+<span id="cb55-48"><a href="multi-state-model-1.html#cb55-48" tabindex="-1"></a>  percent_home <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-49"><a href="multi-state-model-1.html#cb55-49" tabindex="-1"></a>  percent_other <span class="ot">&lt;-</span><span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-50"><a href="multi-state-model-1.html#cb55-50" tabindex="-1"></a>  percent_transit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state<span class="sc">==</span><span class="st">&quot;transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb55-51"><a href="multi-state-model-1.html#cb55-51" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">home_population=</span>x,</span>
+<span id="cb55-52"><a href="multi-state-model-1.html#cb55-52" tabindex="-1"></a>                    <span class="at">percent_home=</span>percent_home,</span>
+<span id="cb55-53"><a href="multi-state-model-1.html#cb55-53" tabindex="-1"></a>                    <span class="at">percent_transit=</span>percent_transit,</span>
+<span id="cb55-54"><a href="multi-state-model-1.html#cb55-54" tabindex="-1"></a>                    <span class="at">percent_other=</span>percent_other))</span>
+<span id="cb55-55"><a href="multi-state-model-1.html#cb55-55" tabindex="-1"></a>}))</span></code></pre></div>
+<p>Calculate the proportion of state switches by different grouping variables:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="multi-state-model-1.html#cb56-1" tabindex="-1"></a><span class="co"># Calculate the proportion of state switches by different grouping variables ----</span></span>
+<span id="cb56-2"><a href="multi-state-model-1.html#cb56-2" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="multi-state-model-1.html#cb56-3" tabindex="-1"></a><span class="co"># proportion of state_switches switches by age:</span></span>
+<span id="cb56-4"><a href="multi-state-model-1.html#cb56-4" tabindex="-1"></a>stateswitch_byage2 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>AGECLASS), <span class="cf">function</span>(x){</span>
+<span id="cb56-5"><a href="multi-state-model-1.html#cb56-5" tabindex="-1"></a>  agedat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>AGECLASS<span class="sc">==</span>x),]</span>
+<span id="cb56-6"><a href="multi-state-model-1.html#cb56-6" tabindex="-1"></a>  none <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;no&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-7"><a href="multi-state-model-1.html#cb56-7" tabindex="-1"></a>  home_population_to_transit <span class="ot">&lt;-</span><span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;home_population_to_transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-8"><a href="multi-state-model-1.html#cb56-8" tabindex="-1"></a>  transit_to_home_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;transit_to_home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-9"><a href="multi-state-model-1.html#cb56-9" tabindex="-1"></a>  other_population_to_transit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state_switches<span class="sc">==</span> <span class="st">&quot;other_population_to_transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-10"><a href="multi-state-model-1.html#cb56-10" tabindex="-1"></a>  transit_to_other_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;transit_to_other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-11"><a href="multi-state-model-1.html#cb56-11" tabindex="-1"></a>  home_population_to_other_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;home_population_to_other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-12"><a href="multi-state-model-1.html#cb56-12" tabindex="-1"></a>  other_population_to_home_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agedat[<span class="fu">which</span>(agedat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;other_population_to_home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agedat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-13"><a href="multi-state-model-1.html#cb56-13" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">age_class=</span>x,</span>
+<span id="cb56-14"><a href="multi-state-model-1.html#cb56-14" tabindex="-1"></a>                    <span class="at">none=</span>none,</span>
+<span id="cb56-15"><a href="multi-state-model-1.html#cb56-15" tabindex="-1"></a>                    <span class="at">home_population_to_transit=</span>home_population_to_transit,</span>
+<span id="cb56-16"><a href="multi-state-model-1.html#cb56-16" tabindex="-1"></a>                    <span class="at">transit_to_home_population=</span>transit_to_home_population,</span>
+<span id="cb56-17"><a href="multi-state-model-1.html#cb56-17" tabindex="-1"></a>                    <span class="at">other_population_to_transit=</span>other_population_to_transit,</span>
+<span id="cb56-18"><a href="multi-state-model-1.html#cb56-18" tabindex="-1"></a>                    <span class="at">transit_to_other_population=</span>transit_to_other_population,</span>
+<span id="cb56-19"><a href="multi-state-model-1.html#cb56-19" tabindex="-1"></a>                    <span class="at">home_population_to_other_population=</span>home_population_to_other_population,</span>
+<span id="cb56-20"><a href="multi-state-model-1.html#cb56-20" tabindex="-1"></a>                    <span class="at">other_population_to_home_population=</span>other_population_to_home_population</span>
+<span id="cb56-21"><a href="multi-state-model-1.html#cb56-21" tabindex="-1"></a>  ))</span>
+<span id="cb56-22"><a href="multi-state-model-1.html#cb56-22" tabindex="-1"></a>}))</span>
+<span id="cb56-23"><a href="multi-state-model-1.html#cb56-23" tabindex="-1"></a></span>
+<span id="cb56-24"><a href="multi-state-model-1.html#cb56-24" tabindex="-1"></a><span class="co"># proportion of state_switches switches by sex:</span></span>
+<span id="cb56-25"><a href="multi-state-model-1.html#cb56-25" tabindex="-1"></a>stateswitch_bysex2 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>SEX), <span class="cf">function</span>(x){</span>
+<span id="cb56-26"><a href="multi-state-model-1.html#cb56-26" tabindex="-1"></a>  sexdat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>SEX<span class="sc">==</span>x),]</span>
+<span id="cb56-27"><a href="multi-state-model-1.html#cb56-27" tabindex="-1"></a>  none <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;no&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-28"><a href="multi-state-model-1.html#cb56-28" tabindex="-1"></a>  home_population_to_transit <span class="ot">&lt;-</span><span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;home_population_to_transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-29"><a href="multi-state-model-1.html#cb56-29" tabindex="-1"></a>  transit_to_home_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;transit_to_home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-30"><a href="multi-state-model-1.html#cb56-30" tabindex="-1"></a>  other_population_to_transit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state_switches<span class="sc">==</span> <span class="st">&quot;other_population_to_transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-31"><a href="multi-state-model-1.html#cb56-31" tabindex="-1"></a>  transit_to_other_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;transit_to_other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-32"><a href="multi-state-model-1.html#cb56-32" tabindex="-1"></a>  home_population_to_other_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;home_population_to_other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-33"><a href="multi-state-model-1.html#cb56-33" tabindex="-1"></a>  other_population_to_home_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(sexdat[<span class="fu">which</span>(sexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;other_population_to_home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(sexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-34"><a href="multi-state-model-1.html#cb56-34" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">sex=</span>x,</span>
+<span id="cb56-35"><a href="multi-state-model-1.html#cb56-35" tabindex="-1"></a>                    <span class="at">none=</span>none,</span>
+<span id="cb56-36"><a href="multi-state-model-1.html#cb56-36" tabindex="-1"></a>                    <span class="at">home_population_to_transit=</span>home_population_to_transit,</span>
+<span id="cb56-37"><a href="multi-state-model-1.html#cb56-37" tabindex="-1"></a>                    <span class="at">transit_to_home_population=</span>transit_to_home_population,</span>
+<span id="cb56-38"><a href="multi-state-model-1.html#cb56-38" tabindex="-1"></a>                    <span class="at">other_population_to_transit=</span>other_population_to_transit,</span>
+<span id="cb56-39"><a href="multi-state-model-1.html#cb56-39" tabindex="-1"></a>                    <span class="at">transit_to_other_population=</span>transit_to_other_population,</span>
+<span id="cb56-40"><a href="multi-state-model-1.html#cb56-40" tabindex="-1"></a>                    <span class="at">home_population_to_other_population=</span>home_population_to_other_population,</span>
+<span id="cb56-41"><a href="multi-state-model-1.html#cb56-41" tabindex="-1"></a>                    <span class="at">other_population_to_home_population=</span>other_population_to_home_population))</span>
+<span id="cb56-42"><a href="multi-state-model-1.html#cb56-42" tabindex="-1"></a>}))</span>
+<span id="cb56-43"><a href="multi-state-model-1.html#cb56-43" tabindex="-1"></a></span>
+<span id="cb56-44"><a href="multi-state-model-1.html#cb56-44" tabindex="-1"></a><span class="co"># proportion of state_switches switches by sex + age combo:</span></span>
+<span id="cb56-45"><a href="multi-state-model-1.html#cb56-45" tabindex="-1"></a>stateswitch_byagesex2 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>agesex), <span class="cf">function</span>(x){</span>
+<span id="cb56-46"><a href="multi-state-model-1.html#cb56-46" tabindex="-1"></a>  agesexdat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>agesex<span class="sc">==</span>x),]</span>
+<span id="cb56-47"><a href="multi-state-model-1.html#cb56-47" tabindex="-1"></a>  none <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;no&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-48"><a href="multi-state-model-1.html#cb56-48" tabindex="-1"></a>  home_population_to_transit <span class="ot">&lt;-</span><span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;home_population_to_transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-49"><a href="multi-state-model-1.html#cb56-49" tabindex="-1"></a>  transit_to_home_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;transit_to_home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-50"><a href="multi-state-model-1.html#cb56-50" tabindex="-1"></a>  other_population_to_transit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state_switches<span class="sc">==</span> <span class="st">&quot;other_population_to_transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-51"><a href="multi-state-model-1.html#cb56-51" tabindex="-1"></a>  transit_to_other_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;transit_to_other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-52"><a href="multi-state-model-1.html#cb56-52" tabindex="-1"></a>  home_population_to_other_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;home_population_to_other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-53"><a href="multi-state-model-1.html#cb56-53" tabindex="-1"></a>  other_population_to_home_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(agesexdat[<span class="fu">which</span>(agesexdat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;other_population_to_home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(agesexdat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-54"><a href="multi-state-model-1.html#cb56-54" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">agesex=</span>x,</span>
+<span id="cb56-55"><a href="multi-state-model-1.html#cb56-55" tabindex="-1"></a>                    <span class="at">none=</span>none,</span>
+<span id="cb56-56"><a href="multi-state-model-1.html#cb56-56" tabindex="-1"></a>                    <span class="at">home_population_to_transit=</span>home_population_to_transit,</span>
+<span id="cb56-57"><a href="multi-state-model-1.html#cb56-57" tabindex="-1"></a>                    <span class="at">transit_to_home_population=</span>transit_to_home_population,</span>
+<span id="cb56-58"><a href="multi-state-model-1.html#cb56-58" tabindex="-1"></a>                    <span class="at">other_population_to_transit=</span>other_population_to_transit,</span>
+<span id="cb56-59"><a href="multi-state-model-1.html#cb56-59" tabindex="-1"></a>                    <span class="at">transit_to_other_population=</span>transit_to_other_population,</span>
+<span id="cb56-60"><a href="multi-state-model-1.html#cb56-60" tabindex="-1"></a>                    <span class="at">home_population_to_other_population=</span>home_population_to_other_population,</span>
+<span id="cb56-61"><a href="multi-state-model-1.html#cb56-61" tabindex="-1"></a>                    <span class="at">other_population_to_home_population=</span>other_population_to_home_population))</span>
+<span id="cb56-62"><a href="multi-state-model-1.html#cb56-62" tabindex="-1"></a>}))</span>
+<span id="cb56-63"><a href="multi-state-model-1.html#cb56-63" tabindex="-1"></a></span>
+<span id="cb56-64"><a href="multi-state-model-1.html#cb56-64" tabindex="-1"></a><span class="co"># proportion of state_switches switches by home population:</span></span>
+<span id="cb56-65"><a href="multi-state-model-1.html#cb56-65" tabindex="-1"></a>stateswitch_byhome2 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>POPULATION), <span class="cf">function</span>(x){</span>
+<span id="cb56-66"><a href="multi-state-model-1.html#cb56-66" tabindex="-1"></a>  popndat <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>POPULATION<span class="sc">==</span>x),]</span>
+<span id="cb56-67"><a href="multi-state-model-1.html#cb56-67" tabindex="-1"></a>  none <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;no&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-68"><a href="multi-state-model-1.html#cb56-68" tabindex="-1"></a>  home_population_to_transit <span class="ot">&lt;-</span><span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;home_population_to_transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-69"><a href="multi-state-model-1.html#cb56-69" tabindex="-1"></a>  transit_to_home_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;transit_to_home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-70"><a href="multi-state-model-1.html#cb56-70" tabindex="-1"></a>  other_population_to_transit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state_switches<span class="sc">==</span> <span class="st">&quot;other_population_to_transit&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-71"><a href="multi-state-model-1.html#cb56-71" tabindex="-1"></a>  transit_to_other_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;transit_to_other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-72"><a href="multi-state-model-1.html#cb56-72" tabindex="-1"></a>  home_population_to_other_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;home_population_to_other_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-73"><a href="multi-state-model-1.html#cb56-73" tabindex="-1"></a>  other_population_to_home_population <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">nrow</span>(popndat[<span class="fu">which</span>(popndat<span class="sc">$</span>state_switches<span class="sc">==</span><span class="st">&quot;other_population_to_home_population&quot;</span>),])<span class="sc">/</span><span class="fu">nrow</span>(popndat))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb56-74"><a href="multi-state-model-1.html#cb56-74" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">home_population=</span>x,</span>
+<span id="cb56-75"><a href="multi-state-model-1.html#cb56-75" tabindex="-1"></a>                    <span class="at">none=</span>none,</span>
+<span id="cb56-76"><a href="multi-state-model-1.html#cb56-76" tabindex="-1"></a>                    <span class="at">home_population_to_transit=</span>home_population_to_transit,</span>
+<span id="cb56-77"><a href="multi-state-model-1.html#cb56-77" tabindex="-1"></a>                    <span class="at">transit_to_home_population=</span>transit_to_home_population,</span>
+<span id="cb56-78"><a href="multi-state-model-1.html#cb56-78" tabindex="-1"></a>                    <span class="at">other_population_to_transit=</span>other_population_to_transit,</span>
+<span id="cb56-79"><a href="multi-state-model-1.html#cb56-79" tabindex="-1"></a>                    <span class="at">transit_to_other_population=</span>transit_to_other_population,</span>
+<span id="cb56-80"><a href="multi-state-model-1.html#cb56-80" tabindex="-1"></a>                    <span class="at">home_population_to_other_population=</span>home_population_to_other_population,</span>
+<span id="cb56-81"><a href="multi-state-model-1.html#cb56-81" tabindex="-1"></a>                    <span class="at">other_population_to_home_population=</span>other_population_to_home_population))</span>
+<span id="cb56-82"><a href="multi-state-model-1.html#cb56-82" tabindex="-1"></a>}))</span></code></pre></div>
+</div>
+<div id="data-visualization" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Data visualization<a href="multi-state-model-1.html#data-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="histograms-of-state-switches" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> histograms of state-switches<a href="multi-state-model-1.html#histograms-of-state-switches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="multi-state-model-1.html#cb57-1" tabindex="-1"></a><span class="co"># histogram of state switches in current data set:</span></span>
+<span id="cb57-2"><a href="multi-state-model-1.html#cb57-2" tabindex="-1"></a><span class="fu">ggplot</span>(popns_in, <span class="fu">aes</span>(<span class="at">x=</span>total_state_switches))<span class="sc">+</span></span>
+<span id="cb57-3"><a href="multi-state-model-1.html#cb57-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill=</span><span class="st">&quot;grey50&quot;</span>, <span class="at">bins=</span><span class="dv">100</span>)<span class="sc">+</span></span>
+<span id="cb57-4"><a href="multi-state-model-1.html#cb57-4" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb57-5"><a href="multi-state-model-1.html#cb57-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;number of state switches&quot;</span>)<span class="sc">+</span></span>
+<span id="cb57-6"><a href="multi-state-model-1.html#cb57-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;number of individuals&quot;</span>)<span class="sc">+</span></span>
+<span id="cb57-7"><a href="multi-state-model-1.html#cb57-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;distribution of number of state switches in resident data&quot;</span>)<span class="sc">+</span></span>
+<span id="cb57-8"><a href="multi-state-model-1.html#cb57-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb57-9"><a href="multi-state-model-1.html#cb57-9" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/histogram%20state%20sw-1.png" width="672" /></p>
+</div>
+<div id="examine-the-number-of-populations-individuals-were-found-in-across-their-data" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Examine the number of populations individuals were found in across their data:<a href="multi-state-model-1.html#examine-the-number-of-populations-individuals-were-found-in-across-their-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="multi-state-model-1.html#cb58-1" tabindex="-1"></a><span class="co"># Examine the number of populations individuals were found in </span></span>
+<span id="cb58-2"><a href="multi-state-model-1.html#cb58-2" tabindex="-1"></a><span class="co"># across the time their movements were tracked</span></span>
+<span id="cb58-3"><a href="multi-state-model-1.html#cb58-3" tabindex="-1"></a>totpopns <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">table</span>(popns_in<span class="sc">$</span>tot_popns))</span>
+<span id="cb58-4"><a href="multi-state-model-1.html#cb58-4" tabindex="-1"></a><span class="fu">colnames</span>(totpopns) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;total_populations_in&quot;</span>, <span class="st">&quot;number_individuals&quot;</span>)</span>
+<span id="cb58-5"><a href="multi-state-model-1.html#cb58-5" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="multi-state-model-1.html#cb58-6" tabindex="-1"></a><span class="co"># plot the number of populations individuals were found in </span></span>
+<span id="cb58-7"><a href="multi-state-model-1.html#cb58-7" tabindex="-1"></a><span class="fu">ggplot</span>(totpopns, <span class="fu">aes</span>(<span class="at">x=</span>total_populations_in, <span class="at">y=</span>number_individuals)) <span class="sc">+</span></span>
+<span id="cb58-8"><a href="multi-state-model-1.html#cb58-8" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb58-9"><a href="multi-state-model-1.html#cb58-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb58-10"><a href="multi-state-model-1.html#cb58-10" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;total populations in&quot;</span>)<span class="sc">+</span></span>
+<span id="cb58-11"><a href="multi-state-model-1.html#cb58-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;number of individuals&quot;</span>)<span class="sc">+</span></span>
+<span id="cb58-12"><a href="multi-state-model-1.html#cb58-12" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;number of populations located in per individual&quot;</span>)<span class="sc">+</span></span>
+<span id="cb58-13"><a href="multi-state-model-1.html#cb58-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb58-14"><a href="multi-state-model-1.html#cb58-14" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/total%20popns%20in-1.png" width="672" /></p>
+</div>
+<div id="examine-number-of-locations-in-each-state-across-the-data" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Examine number of locations in each state across the data:<a href="multi-state-model-1.html#examine-number-of-locations-in-each-state-across-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="multi-state-model-1.html#cb59-1" tabindex="-1"></a><span class="co"># barplot of number of locations in each state</span></span>
+<span id="cb59-2"><a href="multi-state-model-1.html#cb59-2" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x=</span>state, <span class="at">fill =</span> state))<span class="sc">+</span></span>
+<span id="cb59-3"><a href="multi-state-model-1.html#cb59-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb59-4"><a href="multi-state-model-1.html#cb59-4" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb59-5"><a href="multi-state-model-1.html#cb59-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;state&quot;</span>)<span class="sc">+</span></span>
+<span id="cb59-6"><a href="multi-state-model-1.html#cb59-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;number of points in state&quot;</span>)<span class="sc">+</span></span>
+<span id="cb59-7"><a href="multi-state-model-1.html#cb59-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;number of locations in each state&quot;</span>)<span class="sc">+</span></span>
+<span id="cb59-8"><a href="multi-state-model-1.html#cb59-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb59-9"><a href="multi-state-model-1.html#cb59-9" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>),</span>
+<span id="cb59-10"><a href="multi-state-model-1.html#cb59-10" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/barplot%20states-1.png" width="672" /></p>
+</div>
+<div id="examine-number-of-state-switches-across-the-data" class="section level3 hasAnchor" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> Examine number of state switches across the data:<a href="multi-state-model-1.html#examine-number-of-state-switches-across-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="multi-state-model-1.html#cb60-1" tabindex="-1"></a><span class="co"># barplot of number of each state transition type</span></span>
+<span id="cb60-2"><a href="multi-state-model-1.html#cb60-2" tabindex="-1"></a><span class="fu">ggplot</span>(dat[<span class="fu">intersect</span>(<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(dat<span class="sc">$</span>state_switches)),</span>
+<span id="cb60-3"><a href="multi-state-model-1.html#cb60-3" tabindex="-1"></a>                     <span class="fu">which</span>(dat<span class="sc">$</span>state_switches<span class="sc">!=</span><span class="st">&quot;no&quot;</span>)),], <span class="fu">aes</span>(<span class="at">x=</span>state_switches, <span class="at">fill =</span> state_switches))<span class="sc">+</span></span>
+<span id="cb60-4"><a href="multi-state-model-1.html#cb60-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb60-5"><a href="multi-state-model-1.html#cb60-5" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb60-6"><a href="multi-state-model-1.html#cb60-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;state switch&quot;</span>)<span class="sc">+</span></span>
+<span id="cb60-7"><a href="multi-state-model-1.html#cb60-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;number of state switches&quot;</span>)<span class="sc">+</span></span>
+<span id="cb60-8"><a href="multi-state-model-1.html#cb60-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;number each state switch type&quot;</span>)<span class="sc">+</span></span>
+<span id="cb60-9"><a href="multi-state-model-1.html#cb60-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb60-10"><a href="multi-state-model-1.html#cb60-10" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb60-11"><a href="multi-state-model-1.html#cb60-11" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/barplot%20state%20switches-1.png" width="672" /></p>
+</div>
+<div id="examine-state-switches-by-age" class="section level3 hasAnchor" number="3.5.5">
+<h3><span class="header-section-number">3.5.5</span> Examine state switches by age:<a href="multi-state-model-1.html#examine-state-switches-by-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="multi-state-model-1.html#cb61-1" tabindex="-1"></a><span class="co"># examine state switching vs age ----</span></span>
+<span id="cb61-2"><a href="multi-state-model-1.html#cb61-2" tabindex="-1"></a><span class="co"># number of state switches by age:</span></span>
+<span id="cb61-3"><a href="multi-state-model-1.html#cb61-3" tabindex="-1"></a><span class="fu">ggplot</span>(dat[<span class="fu">intersect</span>(<span class="fu">intersect</span>(<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(dat<span class="sc">$</span>state_switches)),</span>
+<span id="cb61-4"><a href="multi-state-model-1.html#cb61-4" tabindex="-1"></a>                               <span class="fu">which</span>(dat<span class="sc">$</span>state_switches<span class="sc">!=</span><span class="st">&quot;no&quot;</span>)),</span>
+<span id="cb61-5"><a href="multi-state-model-1.html#cb61-5" tabindex="-1"></a>                     <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(dat<span class="sc">$</span>AGECLASS))),], <span class="fu">aes</span>(<span class="at">x=</span>AGECLASS, <span class="at">fill =</span> AGECLASS))<span class="sc">+</span></span>
+<span id="cb61-6"><a href="multi-state-model-1.html#cb61-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb61-7"><a href="multi-state-model-1.html#cb61-7" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb61-8"><a href="multi-state-model-1.html#cb61-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;age class&quot;</span>)<span class="sc">+</span></span>
+<span id="cb61-9"><a href="multi-state-model-1.html#cb61-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;number of state switches&quot;</span>)<span class="sc">+</span></span>
+<span id="cb61-10"><a href="multi-state-model-1.html#cb61-10" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;total number of state switches by age&quot;</span>)<span class="sc">+</span></span>
+<span id="cb61-11"><a href="multi-state-model-1.html#cb61-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb61-12"><a href="multi-state-model-1.html#cb61-12" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>),</span>
+<span id="cb61-13"><a href="multi-state-model-1.html#cb61-13" tabindex="-1"></a>        <span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/barplot%20switch%20by%20age-1.png" width="672" /></p>
+</div>
+<div id="plot-state-proportions-by-age" class="section level3 hasAnchor" number="3.5.6">
+<h3><span class="header-section-number">3.5.6</span> Plot state proportions by age:<a href="multi-state-model-1.html#plot-state-proportions-by-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="multi-state-model-1.html#cb62-1" tabindex="-1"></a><span class="co"># plot state proportions by age:</span></span>
+<span id="cb62-2"><a href="multi-state-model-1.html#cb62-2" tabindex="-1"></a>stateswitch_byage <span class="sc">%&gt;%</span> </span>
+<span id="cb62-3"><a href="multi-state-model-1.html#cb62-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(stateswitch_byage<span class="sc">$</span>age_class)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-4"><a href="multi-state-model-1.html#cb62-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;percent_home&quot;</span>, <span class="st">&quot;percent_transit&quot;</span>, <span class="st">&quot;percent_other&quot;</span>),</span>
+<span id="cb62-5"><a href="multi-state-model-1.html#cb62-5" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;state&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-6"><a href="multi-state-model-1.html#cb62-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_class, <span class="at">y =</span> value, <span class="at">fill =</span> state))<span class="sc">+</span></span>
+<span id="cb62-7"><a href="multi-state-model-1.html#cb62-7" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb62-8"><a href="multi-state-model-1.html#cb62-8" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb62-9"><a href="multi-state-model-1.html#cb62-9" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;age class&quot;</span>)<span class="sc">+</span></span>
+<span id="cb62-10"><a href="multi-state-model-1.html#cb62-10" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;percent of locations&quot;</span>)<span class="sc">+</span></span>
+<span id="cb62-11"><a href="multi-state-model-1.html#cb62-11" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;state proportions by age&quot;</span>)<span class="sc">+</span></span>
+<span id="cb62-12"><a href="multi-state-model-1.html#cb62-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb62-13"><a href="multi-state-model-1.html#cb62-13" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb62-14"><a href="multi-state-model-1.html#cb62-14" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;home population&quot;</span>, <span class="st">&quot;other population&quot;</span>, <span class="st">&quot;transit&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/barplot%20state%20proportions%20by%20age-1.png" width="672" /></p>
+</div>
+<div id="plot-state-proportions-by-sex" class="section level3 hasAnchor" number="3.5.7">
+<h3><span class="header-section-number">3.5.7</span> Plot state proportions by sex:<a href="multi-state-model-1.html#plot-state-proportions-by-sex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="multi-state-model-1.html#cb63-1" tabindex="-1"></a><span class="co"># state proportions by sex:</span></span>
+<span id="cb63-2"><a href="multi-state-model-1.html#cb63-2" tabindex="-1"></a>stateswitch_bysex <span class="sc">%&gt;%</span> </span>
+<span id="cb63-3"><a href="multi-state-model-1.html#cb63-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;percent_home&quot;</span>, <span class="st">&quot;percent_transit&quot;</span>, <span class="st">&quot;percent_other&quot;</span>),</span>
+<span id="cb63-4"><a href="multi-state-model-1.html#cb63-4" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;state&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb63-5"><a href="multi-state-model-1.html#cb63-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> value, <span class="at">fill =</span> state))<span class="sc">+</span></span>
+<span id="cb63-6"><a href="multi-state-model-1.html#cb63-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb63-7"><a href="multi-state-model-1.html#cb63-7" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb63-8"><a href="multi-state-model-1.html#cb63-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;sex&quot;</span>)<span class="sc">+</span></span>
+<span id="cb63-9"><a href="multi-state-model-1.html#cb63-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;percent of locations&quot;</span>)<span class="sc">+</span></span>
+<span id="cb63-10"><a href="multi-state-model-1.html#cb63-10" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;state proportions by sex&quot;</span>)<span class="sc">+</span></span>
+<span id="cb63-11"><a href="multi-state-model-1.html#cb63-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb63-12"><a href="multi-state-model-1.html#cb63-12" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb63-13"><a href="multi-state-model-1.html#cb63-13" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;home population&quot;</span>, <span class="st">&quot;other population&quot;</span>, <span class="st">&quot;transit&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/state%20props%20by%20sex-1.png" width="672" /></p>
+</div>
+<div id="plot-state-proportions-by-age-sex-combo" class="section level3 hasAnchor" number="3.5.8">
+<h3><span class="header-section-number">3.5.8</span> Plot state proportions by age + sex combo:<a href="multi-state-model-1.html#plot-state-proportions-by-age-sex-combo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="multi-state-model-1.html#cb64-1" tabindex="-1"></a><span class="co"># plot state proportions by age + sex combo:</span></span>
+<span id="cb64-2"><a href="multi-state-model-1.html#cb64-2" tabindex="-1"></a>stateswitch_byagesex <span class="sc">%&gt;%</span> </span>
+<span id="cb64-3"><a href="multi-state-model-1.html#cb64-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(stateswitch_byagesex<span class="sc">$</span>agesex)) <span class="sc">%&gt;%</span> </span>
+<span id="cb64-4"><a href="multi-state-model-1.html#cb64-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;percent_home&quot;</span>, <span class="st">&quot;percent_transit&quot;</span>, <span class="st">&quot;percent_other&quot;</span>),</span>
+<span id="cb64-5"><a href="multi-state-model-1.html#cb64-5" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;state&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-6"><a href="multi-state-model-1.html#cb64-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> agesex, <span class="at">y =</span> value, <span class="at">fill =</span> state))<span class="sc">+</span></span>
+<span id="cb64-7"><a href="multi-state-model-1.html#cb64-7" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb64-8"><a href="multi-state-model-1.html#cb64-8" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb64-9"><a href="multi-state-model-1.html#cb64-9" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;age + sex&quot;</span>)<span class="sc">+</span></span>
+<span id="cb64-10"><a href="multi-state-model-1.html#cb64-10" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;percent of locations&quot;</span>)<span class="sc">+</span></span>
+<span id="cb64-11"><a href="multi-state-model-1.html#cb64-11" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;state proportions by age + sex&quot;</span>)<span class="sc">+</span></span>
+<span id="cb64-12"><a href="multi-state-model-1.html#cb64-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb64-13"><a href="multi-state-model-1.html#cb64-13" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb64-14"><a href="multi-state-model-1.html#cb64-14" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;home population&quot;</span>, <span class="st">&quot;other population&quot;</span>, <span class="st">&quot;transit&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/plot%20age%20sex%20combo%20state%20props-1.png" width="672" /></p>
+</div>
+<div id="plot-state-proportions-by-population" class="section level3 hasAnchor" number="3.5.9">
+<h3><span class="header-section-number">3.5.9</span> Plot state proportions by population:<a href="multi-state-model-1.html#plot-state-proportions-by-population" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="multi-state-model-1.html#cb65-1" tabindex="-1"></a><span class="co"># plot state proportions by home population:</span></span>
+<span id="cb65-2"><a href="multi-state-model-1.html#cb65-2" tabindex="-1"></a>stateswitch_byhome <span class="sc">%&gt;%</span> </span>
+<span id="cb65-3"><a href="multi-state-model-1.html#cb65-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;percent_home&quot;</span>, <span class="st">&quot;percent_transit&quot;</span>, <span class="st">&quot;percent_other&quot;</span>),</span>
+<span id="cb65-4"><a href="multi-state-model-1.html#cb65-4" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;state&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb65-5"><a href="multi-state-model-1.html#cb65-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> home_population, <span class="at">y =</span> value, <span class="at">fill =</span> state))<span class="sc">+</span></span>
+<span id="cb65-6"><a href="multi-state-model-1.html#cb65-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb65-7"><a href="multi-state-model-1.html#cb65-7" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb65-8"><a href="multi-state-model-1.html#cb65-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;home population&quot;</span>)<span class="sc">+</span></span>
+<span id="cb65-9"><a href="multi-state-model-1.html#cb65-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;percent of locations&quot;</span>)<span class="sc">+</span></span>
+<span id="cb65-10"><a href="multi-state-model-1.html#cb65-10" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;state proportions by home population&quot;</span>)<span class="sc">+</span></span>
+<span id="cb65-11"><a href="multi-state-model-1.html#cb65-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb65-12"><a href="multi-state-model-1.html#cb65-12" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb65-13"><a href="multi-state-model-1.html#cb65-13" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb65-14"><a href="multi-state-model-1.html#cb65-14" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;home population&quot;</span>, <span class="st">&quot;other population&quot;</span>, <span class="st">&quot;transit&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/plot%20state%20props%20by%20popn-1.png" width="672" /></p>
+</div>
+<div id="plot-state-switch-proportions-by-age-sex-combo" class="section level3 hasAnchor" number="3.5.10">
+<h3><span class="header-section-number">3.5.10</span> Plot state switch proportions by age + sex combo:<a href="multi-state-model-1.html#plot-state-switch-proportions-by-age-sex-combo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="multi-state-model-1.html#cb66-1" tabindex="-1"></a><span class="co"># plot state switch proportions by age + sex combo </span></span>
+<span id="cb66-2"><a href="multi-state-model-1.html#cb66-2" tabindex="-1"></a><span class="co"># (without none category)</span></span>
+<span id="cb66-3"><a href="multi-state-model-1.html#cb66-3" tabindex="-1"></a>stateswitch_byagesex2 <span class="sc">%&gt;%</span> </span>
+<span id="cb66-4"><a href="multi-state-model-1.html#cb66-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(stateswitch_byagesex2<span class="sc">$</span>agesex)) <span class="sc">%&gt;%</span> </span>
+<span id="cb66-5"><a href="multi-state-model-1.html#cb66-5" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">colnames</span>(stateswitch_byagesex2)[<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(stateswitch_byagesex2)],</span>
+<span id="cb66-6"><a href="multi-state-model-1.html#cb66-6" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;state_switch&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-7"><a href="multi-state-model-1.html#cb66-7" tabindex="-1"></a>  <span class="fu">filter</span>(state_switch <span class="sc">!=</span> <span class="st">&quot;none&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb66-8"><a href="multi-state-model-1.html#cb66-8" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> agesex, <span class="at">y =</span> value, <span class="at">fill =</span> state_switch))<span class="sc">+</span></span>
+<span id="cb66-9"><a href="multi-state-model-1.html#cb66-9" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb66-10"><a href="multi-state-model-1.html#cb66-10" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb66-11"><a href="multi-state-model-1.html#cb66-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;age + sex&quot;</span>)<span class="sc">+</span></span>
+<span id="cb66-12"><a href="multi-state-model-1.html#cb66-12" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;percent of locations&quot;</span>)<span class="sc">+</span></span>
+<span id="cb66-13"><a href="multi-state-model-1.html#cb66-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;state switch proportions by age + sex&quot;</span>)<span class="sc">+</span></span>
+<span id="cb66-14"><a href="multi-state-model-1.html#cb66-14" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb66-15"><a href="multi-state-model-1.html#cb66-15" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span></span>
+<span id="cb66-16"><a href="multi-state-model-1.html#cb66-16" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;home to other&quot;</span>, <span class="st">&quot;home to transit&quot;</span>, <span class="st">&quot;other to home&quot;</span>, <span class="st">&quot;other to transit&quot;</span>, <span class="st">&quot;transit to home&quot;</span>, <span class="st">&quot;transit to other&quot;</span>),</span>
+<span id="cb66-17"><a href="multi-state-model-1.html#cb66-17" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">&quot;state switch&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/plot%20state%20switch%20props%20by%20age%20and%20sex-1.png" width="672" /></p>
+</div>
+<div id="plot-state-switch-proportions-by-home-population" class="section level3 hasAnchor" number="3.5.11">
+<h3><span class="header-section-number">3.5.11</span> Plot state switch proportions by home population:<a href="multi-state-model-1.html#plot-state-switch-proportions-by-home-population" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="multi-state-model-1.html#cb67-1" tabindex="-1"></a><span class="co"># plot state switch proportions by home population:</span></span>
+<span id="cb67-2"><a href="multi-state-model-1.html#cb67-2" tabindex="-1"></a><span class="co"># (without the none category)</span></span>
+<span id="cb67-3"><a href="multi-state-model-1.html#cb67-3" tabindex="-1"></a>stateswitch_byhome2 <span class="sc">%&gt;%</span> </span>
+<span id="cb67-4"><a href="multi-state-model-1.html#cb67-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">colnames</span>(stateswitch_byhome2)[<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(stateswitch_byhome2)],</span>
+<span id="cb67-5"><a href="multi-state-model-1.html#cb67-5" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;state_switch&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-6"><a href="multi-state-model-1.html#cb67-6" tabindex="-1"></a>  <span class="fu">filter</span>(state_switch <span class="sc">!=</span> <span class="st">&quot;none&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-7"><a href="multi-state-model-1.html#cb67-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> home_population, <span class="at">y =</span> value, <span class="at">fill =</span> state_switch))<span class="sc">+</span></span>
+<span id="cb67-8"><a href="multi-state-model-1.html#cb67-8" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb67-9"><a href="multi-state-model-1.html#cb67-9" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb67-10"><a href="multi-state-model-1.html#cb67-10" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;home population&quot;</span>)<span class="sc">+</span></span>
+<span id="cb67-11"><a href="multi-state-model-1.html#cb67-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;percent of locations&quot;</span>)<span class="sc">+</span></span>
+<span id="cb67-12"><a href="multi-state-model-1.html#cb67-12" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;state switch proportions by home population&quot;</span>)<span class="sc">+</span></span>
+<span id="cb67-13"><a href="multi-state-model-1.html#cb67-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb67-14"><a href="multi-state-model-1.html#cb67-14" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>),</span>
+<span id="cb67-15"><a href="multi-state-model-1.html#cb67-15" tabindex="-1"></a>        <span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span></span>
+<span id="cb67-16"><a href="multi-state-model-1.html#cb67-16" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;home to other&quot;</span>, <span class="st">&quot;home to transit&quot;</span>, <span class="st">&quot;other to home&quot;</span>, <span class="st">&quot;other to transit&quot;</span>, <span class="st">&quot;transit to home&quot;</span>, <span class="st">&quot;transit to other&quot;</span>),</span>
+<span id="cb67-17"><a href="multi-state-model-1.html#cb67-17" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">&quot;state switch&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/plot%20state%20switch%20props%20by%20home%20popn-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-inputs-and-entity-relationship-diagram.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
