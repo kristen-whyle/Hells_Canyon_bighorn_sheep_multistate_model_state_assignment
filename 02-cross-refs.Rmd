@@ -1,0 +1,767 @@
+# Multi-state model
+
+This chapter goes through the multi-state model workflow of assigning bighorn sheep locations to one of the three different states described in Chapter 1, and identifying state-switches in the bighorn sheep movement trajectories.
+
+## Setup: import, clean, and prepare data
+
+### Import data
+
+First we will clear our R environment and load the necessary packages for this workflow.
+
+```{r clear environment and load packages, warning=FALSE, echo=FALSE}
+
+# clear environment
+rm(list=ls())
+
+# load packages ----
+library(terra)
+library(sf)
+library(tidyverse)
+
+```
+
+Chapter 2 shows how the "raw" data tables relate to each other; here we will read in a location dataset that came from those "raw" tables and went through some cleaning steps (not shown) that included getting rid of poor quality/unreliable locations. This dataset is in the format of a track_xyt R object.
+
+```{r read in track_xyt data}
+
+nonsf_dat <- do.call("rbind", readRDS("input_data/trk8a_partially_cleaned_alldata_2024-08.rds"))
+
+```
+
+Now we will load the shapefile delineating population (aka herd) ranges. The population range boundaries in this shapefile have been defined by managers and may be updated in future iterations of this analysis.
+
+
+```{r load shapefile}
+
+popn_ranges <- read_sf("input_data/shapefiles/HellsCanyonHerds.shp")
+
+```
+
+### Clean and format data
+
+Before we can assign locations to different states we need to make sure that the population names are consistent
+between the track_xyt location data object and the shapefile object so that we can appropriately assign each location to a state based on the population of the individual the location data point belongs to and the population (or non-population) the location point falls in within the shapefile.
+
+#### Harmonize population names
+
+The 'NAME' column in the shapefile data refers to the population; for clarity we re-name that column 'Population' here:
+
+``` {r rename NAME column}
+
+colnames(popn_ranges)[5] <- "Population"
+
+```
+
+Now we check the population names in each data source:
+
+```{r check unique population names in each source}
+
+# Population names in location data
+loc_popnames <- unique(nonsf_dat$POPULATION)
+# Population names in shapefile  
+shp_popnames <- unique(popn_ranges$Population)
+```
+
+Which population names match between the sources?
+
+``` {r check population matches}
+# which population names match between the location data and shapefile:
+popname_matches <- loc_popnames[which(loc_popnames %in% shp_popnames)]
+popname_matches
+```
+
+Which population names don't match between the two sources?
+
+``` {r check population mis-matches}
+# population names in shapefile but not location data:
+popname_inshpnotloc <- shp_popnames[-which(shp_popnames %in% loc_popnames)]
+popname_inshpnotloc
+
+# population names in location data but not shapefile:
+popname_inlocnotshp <- loc_popnames[-which(loc_popnames %in% shp_popnames)]
+popname_inlocnotshp
+```
+
+Update the mis-matched population names to the naming conventions in the location data:
+
+``` {r update population names}
+# update shapefile population names to match location data population names:
+popn_ranges[which(popn_ranges$Population=="Lower Hells Canyon"),]$Population <- "LowerHellsCanyon"
+popn_ranges[which(popn_ranges$Population=="Muir Creek"),]$Population <- "Muir"
+popn_ranges[which(popn_ranges$Population=="Saddle Cr."),]$Population <- "Upper Saddle"
+popn_ranges[which(popn_ranges$Population=="Lower Imnaha"),]$Population <- "Imnaha"
+popn_ranges[which(popn_ranges$Population=="Upper Hells Canyon ID"),]$Population <- "UHC-ID"
+popn_ranges[which(popn_ranges$Population=="Upper Hells Canyon OR"),]$Population <- "UHC-OR"
+```
+
+Now that we have updated the population names that we could, re-check which population names match betweeen the two sources and which still don't match:
+
+``` {r check new matches and remaining mis-matches}
+
+# re-check population matching:
+loc_popnames <- unique(nonsf_dat$POPULATION)
+shp_popnames <- unique(popn_ranges$Population)
+
+# populations that match:
+popname_matches <- loc_popnames[which(loc_popnames %in% shp_popnames)]
+popname_matches
+
+# populations that still don't match:
+popname_inshpnotloc <- shp_popnames[-which(shp_popnames %in% loc_popnames)]
+popname_inshpnotloc
+
+popname_inlocnotshp <- loc_popnames[-which(loc_popnames %in% shp_popnames)]
+popname_inlocnotshp
+
+```
+
+Bear Creek is a population in the shapefile that does not have a match in the location data. 
+Minam, Sheep Divide, Quartz, Myers, 05IMREL, Sheep Mountain, and McGraw are population names in the location data that do not have a population match in the shapefile. Before finalizing the multi-state model we will check whether we can get data or clarification on the status of these populations, but for now we will simply remove the location data of individuals assigned to these populations:
+
+```{r remove missing popn individuals}
+
+# Remove individuals from populations not in shapefile from the location dataset ----
+nonsf_dat <- nonsf_dat[which(nonsf_dat$POPULATION %in% popn_ranges$Population),]
+
+```
+
+We will also remove any individuals that were translocated from the dataset before we assign our states and state-switches because we expect their movement patterns to be different than those of resident sheep, and for now we just want to look at the more "typical" movements of resident sheep in our analysis.
+
+```{r remove translocated individuals}
+
+# Remove translocated individuals from the datasets ----
+nonsf_dat <- nonsf_dat[which(nonsf_dat$SOURCE == "R"),]
+
+```
+
+#### Set location data and shapefile to same coordinate reference system (CRS)
+
+Here we format the location data and shapefile so that they align correctly spatially.
+
+I first create the new object dat so that we have both an sf data object (dat)
+as well as a non-sf data object (nonsf_dat); I do this so that we have the location data in the spatial format used by R for spatial calculations and plotting, and retain the the nonsf_dat object so that the path connecting the locations can later be added to plots using ggplot2::geom_path.
+
+
+```{r turn into sf obj}
+
+# turn location data frame into a sf object:
+dat <- st_as_sf(nonsf_dat, coords = c("x_", "y_"), crs = 32611)
+
+```
+
+Now I set the CRS of the population ranges shapefile and location data points to match:
+
+``` {r set crs}
+
+# check CRS of each data source
+st_crs(popn_ranges)
+st_crs(dat) 
+
+# update shapefile CRS to match location data points CRS
+popn_ranges <- st_transform(popn_ranges, crs = 32611)
+
+# check that the above worked appropriately
+st_crs(dat)==st_crs(popn_ranges) 
+
+```
+
+## State assignment
+
+Assign each bighorn sheep location to a state indicating if the individual 
+was located within its own home population range (state = home), 
+within an other population range that is not its home population range 
+(state = other), or was not located in any known bighorn sheep population 
+range (state = transit).
+
+```{r state assignment, warning=FALSE}
+
+# for each location, report which population range polygon (if any) it's in
+polygon_in <- st_intersects(dat, popn_ranges)
+
+# add the polygon a location is in as a column to the data
+# (note: this will classify locations not in a population range polygon as NA)
+dat$polygon_in <- as.numeric(as.character(polygon_in)) 
+
+# report the name of the population the point was located in, 
+#  or NA if it was not within any population range
+dat$population_in <- popn_ranges[dat$polygon_in, ]$Population
+
+# create a state column 
+# denoting if an individual was located in their home population, 
+# in an other population, or in transit (i.e. not in any population):
+dat$state <- NA
+dat[which(dat$population_in==dat$POPULATION),]$state <- "home_population"
+dat[which(dat$population_in!=dat$POPULATION),]$state <- "other_population"
+dat[which(is.na(dat$population_in)),]$state <- "transit"
+
+
+```
+
+Plot location data colored by state on top of the population ranges:
+
+```{r plot locations colored by state}
+ggplot() +
+  geom_sf(data = popn_ranges[,5], size = 3, color = "black", aes(fill = Population)) +
+  geom_sf(data = dat, size = 1, aes(color = state), alpha=0.25) +
+  ggtitle("Hells Canyon bighorn sheep locations and population ranges") +
+  coord_sf(xlim=c(415656.271001306, 573522.865745345), ylim=c(4947089.96507637, 5175432.83718414)) + # set extent to match transit points
+  scale_color_viridis_d()+
+  #theme_light()
+  theme_void() 
+
+
+```
+
+Save the figure created above:
+
+```{r save the Rplot map, eval=FALSE}
+
+ggsave(filename = "figures/population_shapefile_with_bighorn_locations_colored_by_state_alldata_2024-08.tiff", 
+       device = "tiff", 
+       width = 14, 
+       height = 8, 
+       units = "in", 
+       dpi = 400)
+
+```
+
+Examine the distribution of states in the data:
+
+```{r examine state disbn}
+
+# number of points assigned to each state across location dataset:
+table(dat$state)
+
+#proportion of locations in each state:
+round(table(dat$state)/nrow(dat), 2)
+
+```
+
+Examine the distribution of states in the data by demographic group:
+
+```{r examine states by dem grp}
+
+# for each demographic group (unique sex + age class combo),
+# tally the number of points in the dataset classified in each state:
+dat %>% 
+  as_tibble() %>% 
+  mutate(sex_age_combo = case_when(
+    SEX == "F" & AGECLASS == "Adult" ~ "Adult Female",
+    SEX == "M" & AGECLASS == "Adult" ~ "Adult Male",
+    SEX == "F" & AGECLASS == "Yearling" ~ "Yearling Female",
+    SEX == "M" & AGECLASS == "Yearling" ~ "Yearling Male",
+    SEX == "F" & AGECLASS == "Lamb" ~ "Lamb Female",
+    SEX == "M" & AGECLASS == "Lamb" ~ "Lamb Male",
+    is.na(AGECLASS) & SEX == "F" ~ "Unknown Female",
+    is.na(AGECLASS) & SEX == "M" ~ "Unknown Male",
+  )) %>% 
+  group_by(sex_age_combo, state) %>% 
+  tally() %>% 
+  arrange(desc(n))
+
+```
+
+## State-switches
+
+For each individual bighorn sheep in the movement dataset track the state transitions they make (if any).
+Do this by checking if the end location of each movement step is in a different state than the start location of the step.
+
+```{r state switches, echo=T, results="hide"}
+# Add the state switch information to the dataset
+dat <- do.call("rbind", lapply(unique(dat$ANIMALID), function(x){
+  ind_dat <- dat[which(dat$ANIMALID==x),]
+  if (nrow(ind_dat) > 1){
+  state_switches <- do.call("c", lapply(2:nrow(ind_dat), function(y){
+    current_state <- ind_dat$state[y]
+    previous_state <- ind_dat$state[y-1]
+    if (current_state == previous_state) {state_switch <- "no"} else {
+      # specify the type of state switch
+      state_switch <- paste0(previous_state, "_to_", current_state)}
+      return(state_switch)
+  }))
+  ind_dat$state_switches <- c(NA, state_switches) # NA for 1st point 
+  } else {
+    ind_dat$state_switches <- NA
+  }
+  return(ind_dat)
+}))
+
+```
+
+Examine the total number of each state-switch hype in the data, as well as the proportion of each state-switch type in the data
+
+```{r }
+
+# total number of state switches in data set:
+table(dat$state_switches)
+
+# percentage of state switches in data set:
+round((table(dat[which(!is.na(dat$state_switches)),]$state_switches)/nrow(dat[which(!is.na(dat$state_switches)),]))*100, 2)
+
+```
+
+
+For each demographic group (unique sex + age class combo), tally the number of points in the dataset classified as each state-switch type:
+
+```{r use tidyverse to tally state switches by demographic group}
+
+dat %>% 
+  as_tibble() %>% 
+  # remove NA state_switches corresponding to first location of each individual
+  filter(!is.na(state_switches)) %>% 
+  mutate(sex_age_combo = case_when(
+    SEX == "F" & AGECLASS == "Adult" ~ "Adult Female",
+    SEX == "M" & AGECLASS == "Adult" ~ "Adult Male",
+    SEX == "F" & AGECLASS == "Yearling" ~ "Yearling Female",
+    SEX == "M" & AGECLASS == "Yearling" ~ "Yearling Male",
+    SEX == "F" & AGECLASS == "Lamb" ~ "Lamb Female",
+    SEX == "M" & AGECLASS == "Lamb" ~ "Lamb Male",
+    is.na(AGECLASS) & SEX == "F" ~ "Unknown Female",
+    is.na(AGECLASS) & SEX == "M" ~ "Unknown Male",
+  )) %>% 
+  group_by(sex_age_combo, state_switches) %>% 
+  tally() %>% 
+  arrange(desc(n))
+
+```
+
+
+## Create additional summary data
+
+For each individual, tally the number of populations they were in and the number of state switches in their data:
+
+```{r tally individual level state switch info}
+
+# split data by individual
+dats <- split(dat, dat$ANIMALID)
+
+# tally the number of populations each individual was in and number of state switches
+popns_in <- do.call("rbind", lapply(1:length(dats), function(x){
+  ind_dat <- dats[[x]]
+  tot_popns <- length(unique(ind_dat$population_in[which(!is.na(ind_dat$population_in))]))
+  if(any(is.na(ind_dat$population_in))) {in_transit <- T} else {in_transit <- F}
+  tot_popns_and_transit <- length(unique(ind_dat$population_in))
+  all_popns_in <- paste(unique(ind_dat$population_in[which(!is.na(ind_dat$population_in))]), collapse="; ")
+  start_date <- min(ind_dat$datetime)
+  end_date <- max(ind_dat$datetime)
+  time_tracked <- difftime(end_date, start_date)
+  # tally state switches
+  total_state_switches <- length(intersect(which(!is.na(ind_dat$state_switches)), 
+                                                 which(ind_dat$state_switches!="no")))
+  total_home_to_transit <- length(which(ind_dat$state_switches == "home_population_to_transit"))
+  total_home_to_other <- length(which(ind_dat$state_switches == "home_population_to_other_population"))
+  total_transit_to_home <- length(which(ind_dat$state_switches == "transit_to_home_population"))
+  total_transit_to_other <- length(which(ind_dat$state_switches == "transit_to_other_population"))
+  total_other_to_home <- length(which(ind_dat$state_switches == "other_population_to_home_population"))
+  total_other_to_transit <- length(which(ind_dat$state_switches == "other_population_to_transit"))
+  return(data.frame(animalID=unique(ind_dat$ANIMALID), 
+                    source=paste0(unique(ind_dat$SOURCE), collapse="; "),
+                    home_popn= unique(ind_dat$POPULATION),
+                    tot_popns=tot_popns, 
+                    in_transit = in_transit,
+                    tot_popns_and_transit=tot_popns_and_transit,
+                    all_popns_in=all_popns_in,
+                    total_state_switches=total_state_switches,
+                    total_home_to_transit=total_home_to_transit,
+                    total_home_to_other=total_home_to_other,
+                    total_transit_to_home=total_transit_to_home,
+                    total_transit_to_other=total_transit_to_other,
+                    total_other_to_home=total_other_to_home,
+                    total_other_to_transit=total_other_to_transit,
+                    start_date=start_date, 
+                    end_date=end_date, 
+                    time_tracked=time_tracked,
+                    switches_per_year=round(total_state_switches/(as.numeric(time_tracked)/365.25), 1)))
+}))
+
+# examine the first few rows of the summary data frame
+head(popns_in)
+
+```
+
+Calculate the proportion of states by different grouping variables:
+
+```{r prop states by grp vars}
+
+# make age and sex ordered factor levels
+dat$SEX <- factor(dat$SEX, levels=c("F", "M"))
+dat$AGECLASS <- factor(dat$AGECLASS, levels=c("Adult", "Yearling", "Lamb"))
+
+# create an age_sex column on dat that combines age class and sex
+dat$agesex <- factor(paste0(substr(dat$AGECLASS, 1, 1), dat$SEX),
+                     levels=c("AF", "AM", "YF", "YM", "LF", "LM"))
+
+# proportion of states by age:
+stateswitch_byage <- do.call("rbind", lapply(unique(dat$AGECLASS), function(x){
+  agedat <- dat[which(dat$AGECLASS==x),]
+  percent_home <- round((nrow(agedat[which(agedat$state=="home_population"),])/nrow(agedat))*100, 2)
+  percent_other <-round((nrow(agedat[which(agedat$state=="other_population"),])/nrow(agedat))*100, 2)
+  percent_transit <- round((nrow(agedat[which(agedat$state=="transit"),])/nrow(agedat))*100, 2)
+  return(data.frame(age_class=x,
+                    percent_home=percent_home,
+                    percent_transit=percent_transit,
+                    percent_other=percent_other))
+}))
+
+# proportion of states by sex:
+stateswitch_bysex <- do.call("rbind", lapply(unique(dat$SEX), function(x){
+  sexdat <- dat[which(dat$SEX==x),]
+  percent_home <- round((nrow(sexdat[which(sexdat$state=="home_population"),])/nrow(sexdat))*100, 2)
+  percent_other <-round((nrow(sexdat[which(sexdat$state=="other_population"),])/nrow(sexdat))*100, 2)
+  percent_transit <- round((nrow(sexdat[which(sexdat$state=="transit"),])/nrow(sexdat))*100, 2)
+  return(data.frame(sex=x,
+                    percent_home=percent_home,
+                    percent_transit=percent_transit,
+                    percent_other=percent_other))
+}))
+
+# proportion of states by sex + age combo:
+stateswitch_byagesex <- do.call("rbind", lapply(unique(dat$agesex), function(x){
+  agesexdat <- dat[which(dat$agesex==x),]
+  percent_home <- round((nrow(agesexdat[which(agesexdat$state=="home_population"),])/nrow(agesexdat))*100, 2)
+  percent_other <-round((nrow(agesexdat[which(agesexdat$state=="other_population"),])/nrow(agesexdat))*100, 2)
+  percent_transit <- round((nrow(agesexdat[which(agesexdat$state=="transit"),])/nrow(agesexdat))*100, 2)
+  return(data.frame(agesex=x,
+                    percent_home=percent_home,
+                    percent_transit=percent_transit,
+                    percent_other=percent_other))
+}))
+
+# proportion of states by home population:
+stateswitch_byhome <- do.call("rbind", lapply(unique(dat$POPULATION), function(x){
+  popndat <- dat[which(dat$POPULATION==x),]
+  percent_home <- round((nrow(popndat[which(popndat$state=="home_population"),])/nrow(popndat))*100, 2)
+  percent_other <-round((nrow(popndat[which(popndat$state=="other_population"),])/nrow(popndat))*100, 2)
+  percent_transit <- round((nrow(popndat[which(popndat$state=="transit"),])/nrow(popndat))*100, 2)
+  return(data.frame(home_population=x,
+                    percent_home=percent_home,
+                    percent_transit=percent_transit,
+                    percent_other=percent_other))
+}))
+
+
+```
+
+Calculate the proportion of state switches by different grouping variables:
+
+
+```{r calc prop switched by diff grp vars}
+# Calculate the proportion of state switches by different grouping variables ----
+
+# proportion of state_switches switches by age:
+stateswitch_byage2 <- do.call("rbind", lapply(unique(dat$AGECLASS), function(x){
+  agedat <- dat[which(dat$AGECLASS==x),]
+  none <- round((nrow(agedat[which(agedat$state_switches=="no"),])/nrow(agedat))*100, 2)
+  home_population_to_transit <-round((nrow(agedat[which(agedat$state_switches=="home_population_to_transit"),])/nrow(agedat))*100, 2)
+  transit_to_home_population <- round((nrow(agedat[which(agedat$state_switches=="transit_to_home_population"),])/nrow(agedat))*100, 2)
+  other_population_to_transit <- round((nrow(agedat[which(agedat$state_switches== "other_population_to_transit"),])/nrow(agedat))*100, 2)
+  transit_to_other_population <- round((nrow(agedat[which(agedat$state_switches=="transit_to_other_population"),])/nrow(agedat))*100, 2)
+  home_population_to_other_population <- round((nrow(agedat[which(agedat$state_switches=="home_population_to_other_population"),])/nrow(agedat))*100, 2)
+  other_population_to_home_population <- round((nrow(agedat[which(agedat$state_switches=="other_population_to_home_population"),])/nrow(agedat))*100, 2)
+  return(data.frame(age_class=x,
+                    none=none,
+                    home_population_to_transit=home_population_to_transit,
+                    transit_to_home_population=transit_to_home_population,
+                    other_population_to_transit=other_population_to_transit,
+                    transit_to_other_population=transit_to_other_population,
+                    home_population_to_other_population=home_population_to_other_population,
+                    other_population_to_home_population=other_population_to_home_population
+  ))
+}))
+
+# proportion of state_switches switches by sex:
+stateswitch_bysex2 <- do.call("rbind", lapply(unique(dat$SEX), function(x){
+  sexdat <- dat[which(dat$SEX==x),]
+  none <- round((nrow(sexdat[which(sexdat$state_switches=="no"),])/nrow(sexdat))*100, 2)
+  home_population_to_transit <-round((nrow(sexdat[which(sexdat$state_switches=="home_population_to_transit"),])/nrow(sexdat))*100, 2)
+  transit_to_home_population <- round((nrow(sexdat[which(sexdat$state_switches=="transit_to_home_population"),])/nrow(sexdat))*100, 2)
+  other_population_to_transit <- round((nrow(sexdat[which(sexdat$state_switches== "other_population_to_transit"),])/nrow(sexdat))*100, 2)
+  transit_to_other_population <- round((nrow(sexdat[which(sexdat$state_switches=="transit_to_other_population"),])/nrow(sexdat))*100, 2)
+  home_population_to_other_population <- round((nrow(sexdat[which(sexdat$state_switches=="home_population_to_other_population"),])/nrow(sexdat))*100, 2)
+  other_population_to_home_population <- round((nrow(sexdat[which(sexdat$state_switches=="other_population_to_home_population"),])/nrow(sexdat))*100, 2)
+  return(data.frame(sex=x,
+                    none=none,
+                    home_population_to_transit=home_population_to_transit,
+                    transit_to_home_population=transit_to_home_population,
+                    other_population_to_transit=other_population_to_transit,
+                    transit_to_other_population=transit_to_other_population,
+                    home_population_to_other_population=home_population_to_other_population,
+                    other_population_to_home_population=other_population_to_home_population))
+}))
+
+# proportion of state_switches switches by sex + age combo:
+stateswitch_byagesex2 <- do.call("rbind", lapply(unique(dat$agesex), function(x){
+  agesexdat <- dat[which(dat$agesex==x),]
+  none <- round((nrow(agesexdat[which(agesexdat$state_switches=="no"),])/nrow(agesexdat))*100, 2)
+  home_population_to_transit <-round((nrow(agesexdat[which(agesexdat$state_switches=="home_population_to_transit"),])/nrow(agesexdat))*100, 2)
+  transit_to_home_population <- round((nrow(agesexdat[which(agesexdat$state_switches=="transit_to_home_population"),])/nrow(agesexdat))*100, 2)
+  other_population_to_transit <- round((nrow(agesexdat[which(agesexdat$state_switches== "other_population_to_transit"),])/nrow(agesexdat))*100, 2)
+  transit_to_other_population <- round((nrow(agesexdat[which(agesexdat$state_switches=="transit_to_other_population"),])/nrow(agesexdat))*100, 2)
+  home_population_to_other_population <- round((nrow(agesexdat[which(agesexdat$state_switches=="home_population_to_other_population"),])/nrow(agesexdat))*100, 2)
+  other_population_to_home_population <- round((nrow(agesexdat[which(agesexdat$state_switches=="other_population_to_home_population"),])/nrow(agesexdat))*100, 2)
+  return(data.frame(agesex=x,
+                    none=none,
+                    home_population_to_transit=home_population_to_transit,
+                    transit_to_home_population=transit_to_home_population,
+                    other_population_to_transit=other_population_to_transit,
+                    transit_to_other_population=transit_to_other_population,
+                    home_population_to_other_population=home_population_to_other_population,
+                    other_population_to_home_population=other_population_to_home_population))
+}))
+
+# proportion of state_switches switches by home population:
+stateswitch_byhome2 <- do.call("rbind", lapply(unique(dat$POPULATION), function(x){
+  popndat <- dat[which(dat$POPULATION==x),]
+  none <- round((nrow(popndat[which(popndat$state_switches=="no"),])/nrow(popndat))*100, 2)
+  home_population_to_transit <-round((nrow(popndat[which(popndat$state_switches=="home_population_to_transit"),])/nrow(popndat))*100, 2)
+  transit_to_home_population <- round((nrow(popndat[which(popndat$state_switches=="transit_to_home_population"),])/nrow(popndat))*100, 2)
+  other_population_to_transit <- round((nrow(popndat[which(popndat$state_switches== "other_population_to_transit"),])/nrow(popndat))*100, 2)
+  transit_to_other_population <- round((nrow(popndat[which(popndat$state_switches=="transit_to_other_population"),])/nrow(popndat))*100, 2)
+  home_population_to_other_population <- round((nrow(popndat[which(popndat$state_switches=="home_population_to_other_population"),])/nrow(popndat))*100, 2)
+  other_population_to_home_population <- round((nrow(popndat[which(popndat$state_switches=="other_population_to_home_population"),])/nrow(popndat))*100, 2)
+  return(data.frame(home_population=x,
+                    none=none,
+                    home_population_to_transit=home_population_to_transit,
+                    transit_to_home_population=transit_to_home_population,
+                    other_population_to_transit=other_population_to_transit,
+                    transit_to_other_population=transit_to_other_population,
+                    home_population_to_other_population=home_population_to_other_population,
+                    other_population_to_home_population=other_population_to_home_population))
+}))
+
+```
+
+
+## Data visualization
+
+### histograms of state-switches
+
+```{r histogram state sw}
+
+# histogram of state switches in current data set:
+ggplot(popns_in, aes(x=total_state_switches))+
+  geom_histogram(color="black", fill="grey50", bins=100)+
+  theme_light()+
+  xlab("number of state switches")+
+  ylab("number of individuals")+
+  ggtitle("distribution of number of state switches in resident data")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 13))
+
+```
+
+### Examine the number of populations individuals were found in across their data:
+
+```{r total popns in }
+
+# Examine the number of populations individuals were found in 
+# across the time their movements were tracked
+totpopns <- data.frame(table(popns_in$tot_popns))
+colnames(totpopns) <- c("total_populations_in", "number_individuals")
+
+# plot the number of populations individuals were found in 
+ggplot(totpopns, aes(x=total_populations_in, y=number_individuals)) +
+  geom_bar(stat="identity")+
+  theme_bw()+
+  xlab("total populations in")+
+  ylab("number of individuals")+
+  ggtitle("number of populations located in per individual")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 15))
+
+```
+
+### Examine number of locations in each state across the data:
+
+```{r barplot states}
+
+# barplot of number of locations in each state
+ggplot(dat, aes(x=state, fill = state))+
+  geom_bar()+
+  theme_light()+
+  xlab("state")+
+  ylab("number of points in state")+
+  ggtitle("number of locations in each state")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 18),
+        legend.position = "none")
+```
+
+
+### Examine number of state switches across the data:
+
+```{r barplot state switches}
+
+# barplot of number of each state transition type
+ggplot(dat[intersect(which(!is.na(dat$state_switches)),
+                     which(dat$state_switches!="no")),], aes(x=state_switches, fill = state_switches))+
+  geom_bar()+
+  theme_light()+
+  xlab("state switch")+
+  ylab("number of state switches")+
+  ggtitle("number each state switch type")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 14),
+        axis.text.x = element_blank())
+
+```
+
+
+### Examine state switches by age:
+
+```{r barplot switch by age}
+
+# examine state switching vs age ----
+# number of state switches by age:
+ggplot(dat[intersect(intersect(which(!is.na(dat$state_switches)),
+                               which(dat$state_switches!="no")),
+                     which(!is.na(dat$AGECLASS))),], aes(x=AGECLASS, fill = AGECLASS))+
+  geom_bar()+
+  theme_light()+
+  xlab("age class")+
+  ylab("number of state switches")+
+  ggtitle("total number of state switches by age")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 18),
+        legend.position="none")
+
+
+```
+
+
+### Plot state proportions by age:
+
+```{r barplot state proportions by age}
+
+# plot state proportions by age:
+stateswitch_byage %>% 
+  filter(!is.na(stateswitch_byage$age_class)) %>% 
+  pivot_longer(cols=c("percent_home", "percent_transit", "percent_other"),
+               names_to = "state") %>%
+  ggplot(aes(x = age_class, y = value, fill = state))+
+  geom_bar(position="stack", stat="identity") +
+  theme_light()+
+  xlab("age class")+
+  ylab("percent of locations")+
+  ggtitle("state proportions by age")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 15)) +
+  scale_fill_viridis_d(labels=c("home population", "other population", "transit"))
+
+```
+
+
+### Plot state proportions by sex:
+
+```{r state props by sex}
+
+# state proportions by sex:
+stateswitch_bysex %>% 
+  pivot_longer(cols=c("percent_home", "percent_transit", "percent_other"),
+               names_to = "state") %>%
+  ggplot(aes(x = sex, y = value, fill = state))+
+  geom_bar(position="stack", stat="identity") +
+  theme_light()+
+  xlab("sex")+
+  ylab("percent of locations")+
+  ggtitle("state proportions by sex")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 15)) +
+  scale_fill_viridis_d(labels=c("home population", "other population", "transit"))
+
+```
+
+
+### Plot state proportions by age + sex combo:
+
+```{r plot age sex combo state props}
+
+# plot state proportions by age + sex combo:
+stateswitch_byagesex %>% 
+  filter(!is.na(stateswitch_byagesex$agesex)) %>% 
+  pivot_longer(cols=c("percent_home", "percent_transit", "percent_other"),
+               names_to = "state") %>%
+  ggplot(aes(x = agesex, y = value, fill = state))+
+  geom_bar(position="stack", stat="identity") +
+  theme_light()+
+  xlab("age + sex")+
+  ylab("percent of locations")+
+  ggtitle("state proportions by age + sex")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 15)) +
+  scale_fill_viridis_d(labels=c("home population", "other population", "transit"))
+
+```
+
+
+### Plot state proportions by population:
+
+```{r plot state props by popn}
+
+# plot state proportions by home population:
+stateswitch_byhome %>% 
+  pivot_longer(cols=c("percent_home", "percent_transit", "percent_other"),
+               names_to = "state") %>%
+  ggplot(aes(x = home_population, y = value, fill = state))+
+  geom_bar(position="stack", stat="identity") +
+  theme_light()+
+  xlab("home population")+
+  ylab("percent of locations")+
+  ggtitle("state proportions by home population")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 14),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  scale_fill_viridis_d(labels=c("home population", "other population", "transit"))
+
+```
+
+
+
+### Plot state switch proportions by age + sex combo:
+
+```{r plot state switch props by age and sex}
+
+# plot state switch proportions by age + sex combo 
+# (without none category)
+stateswitch_byagesex2 %>% 
+  filter(!is.na(stateswitch_byagesex2$agesex)) %>% 
+  pivot_longer(cols=colnames(stateswitch_byagesex2)[2:ncol(stateswitch_byagesex2)],
+               names_to = "state_switch") %>%
+  filter(state_switch != "none") %>% 
+  ggplot(aes(x = agesex, y = value, fill = state_switch))+
+  geom_bar(position="stack", stat="identity") +
+  theme_light()+
+  xlab("age + sex")+
+  ylab("percent of locations")+
+  ggtitle("state switch proportions by age + sex")+
+  theme(plot.title=element_text(hjust=0.5),
+        text=element_text(size = 14)) +
+  scale_fill_discrete(labels=c("home to other", "home to transit", "other to home", "other to transit", "transit to home", "transit to other"),
+                      name = "state switch")
+
+```
+
+
+### Plot state switch proportions by home population:
+
+```{r plot state switch props by home popn}
+
+# plot state switch proportions by home population:
+# (without the none category)
+stateswitch_byhome2 %>% 
+  pivot_longer(cols=colnames(stateswitch_byhome2)[2:ncol(stateswitch_byhome2)],
+               names_to = "state_switch") %>%
+  filter(state_switch != "none") %>% 
+  ggplot(aes(x = home_population, y = value, fill = state_switch))+
+  geom_bar(position="stack", stat="identity") +
+  theme_light()+
+  xlab("home population")+
+  ylab("percent of locations")+
+  ggtitle("state switch proportions by home population")+
+  theme(plot.title=element_text(hjust=0.5),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
+        text=element_text(size = 14)) +
+  scale_fill_discrete(labels=c("home to other", "home to transit", "other to home", "other to transit", "transit to home", "transit to other"),
+                      name = "state switch")
+```
+

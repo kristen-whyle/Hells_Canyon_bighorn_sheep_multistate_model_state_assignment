@@ -1,0 +1,9 @@
+*.jpg
+*.docx
+figures/
+input_data/
+output_data/
+*.Rhistory
+*.db
+/.Rproj.user/
+images/

@@ -1,0 +1,119 @@
+---
+title: "Movement ecology of Hells Canyon bighorn sheep: multi-state model state assignment"
+author: "Kristen Whyle"
+date: "`r Sys.Date()`"
+output: pdf_document
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  set in the _output.yml file.
+  The HTML output format for this example is bookdown::gitbook,
+link-citations: true
+github-repo: "rstudio/bookdown-demo"
+fig_caption: true
+site: bookdown::bookdown_site
+---
+
+# Movement ecology of bighorn sheep in Hells Canyon
+
+This multi-state model state assignment workflow is part of a larger PhD project investigating the movement ecology of bighorn sheep (*Ovis canadensis*) in the Hells Canyon region of Idaho, Washington and Oregon. The work is being carried out by Kristen Whyle under the supervision of Dr. Simona Picardi at the University of Idaho, and in collaboration with the Idaho department of Fish and Game, the Washington Department of Fish and Wildlife and the Oregon Department of Fish and Wildlife.
+
+
+```{r fig.cap = "Bighorn sheep in Hells Canyon", fig.align='center', out.width='80%', echo = FALSE}
+
+knitr::include_graphics("images/IMG_2685.JPG")
+
+```
+
+```{r fig.cap = "Hells Canyon landscape", fig.align='center', out.width='80%', echo = FALSE}
+
+knitr::include_graphics("images/IMG_0968.JPG")
+
+```
+
+
+## Hells Canyon bighorn sheep
+
+The Hells Canyon region of ID, OR, and WA is currently home to a metapopulation of bighorn sheep composed of several different populations (Figure 1.3). 
+
+```{r import shapefile, include=FALSE}
+
+# load packages ----
+library(terra)
+library(sf)
+library(tidyverse)
+
+# named paths for file directories ----
+
+# input data file path
+#ifp <- "input_data/"
+
+# output data file path 
+# (for processed/semi-processed data resulting from this script)
+#ofp <- "output_data/"
+
+# population ranges shapefile file path
+#sfp <- "input_data/shapefiles/"
+
+# figures file path
+#ffp <- "figures/"
+  
+# import data ----
+
+# load sheep location data:
+# note this is all data partially cleaned;
+# update with fully cleaned data when ready
+nonsf_dat <- do.call("rbind", readRDS("input_data/trk8a_partially_cleaned_alldata_2024-08.rds"))
+
+# load shapefile delineating population (aka herd) ranges:
+# (note this is a manager defined shapefile and herd areas may not be precise
+# we may update the shapefiles used in the future)
+popn_ranges <- read_sf("input_data/shapefiles/HellsCanyonHerds.shp")
+
+# harmonize population names ----
+
+# rename popn_ranges NAME column to Population
+colnames(popn_ranges)[5] <- "Population"
+
+# update shapefile population names to match location data population names:
+popn_ranges[which(popn_ranges$Population=="Lower Hells Canyon"),]$Population <- "LowerHellsCanyon"
+popn_ranges[which(popn_ranges$Population=="Muir Creek"),]$Population <- "Muir"
+popn_ranges[which(popn_ranges$Population=="Saddle Cr."),]$Population <- "Upper Saddle"
+popn_ranges[which(popn_ranges$Population=="Lower Imnaha"),]$Population <- "Imnaha"
+popn_ranges[which(popn_ranges$Population=="Upper Hells Canyon ID"),]$Population <- "UHC-ID"
+popn_ranges[which(popn_ranges$Population=="Upper Hells Canyon OR"),]$Population <- "UHC-OR"
+
+```
+
+
+```{r fig.cap = "Hells Canyon Bighorn sheep populations", fig.align='center', out.width='100%', echo = FALSE}
+
+# plot the herd range shapefile ----
+plot(popn_ranges[5], main = "Hells Canyon Bighorn Sheep Populations")
+
+```
+
+Bighorn sheep are native to Hells Canyon but were extirpated by 1945, likely due to a combination of overharvesting and competition and disease introduced from livestock. Reintroductions began in 1971 and the metapopulation has been monitored ever since, including by collecting data on their movements by VHF/GPS collaring individuals (Figure 1.4). The first VHF data was collected in 1997 and the first GPS data was collected in 2005 and both continue to be collected today. 
+
+```{r fig.cap = "GPS-collared bighorn sheep in Hells Canyon", fig.align='center', out.width='80%', echo = FALSE}
+
+knitr::include_graphics("images/IMG_3903.JPG")
+
+```
+
+
+There have been multiple disease outbreaks in the metapopulation during this time, and disease continues to be a major threat. The main pathogen of concern is *Mycoplasma ovipneumoniae*, which causes pneumonia. It spreads to bighorn via contact with infected domestic sheep or goats or infected conspecifics, and can cause large population declines. These contacts depend on bighorn sheep movements, which makes understanding their movements important for conservation, and that is where this research project comes in.
+
+
+## Multi-state model
+
+One of the objectives of this project is to quantify the interactions between the population dynamics and spatial dynamics of these bighorn sheep, in particular to quantify how demographic and environmental factors shape herd ranges and the probability of out-of-range movements including forays and dispersals.
+
+To address this objective we are creating a multi-state model that will assign bighorn sheep locations to 1 of three different spatial states: 1) a home range state (for points located within an individuals home population) 2) an other-range state (for points located in any Hells Canyon population range other than an individual's home population range) and 3) a transit state (for points that are not located within any bighorn sheep population range). It will also identify when individuals' movement steps switch between states.
+
+Once states and state switches are identified by the model we can examine the probability of individuals switching between states based on environmental variables and population demography variables. 
+
+In this workflow we focus only on the first two components of the multi-state model; assigning states and identifying state switches in the movement data.

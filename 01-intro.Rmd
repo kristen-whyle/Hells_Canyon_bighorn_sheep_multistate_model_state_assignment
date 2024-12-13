@@ -1,0 +1,187 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Data inputs and Entity Relationship Diagram
+
+The input data for this multi-state model workflow include a track_xyt R object, which is a processed version of the bighorn sheep location data created from the "raw" data inputs in previous workflows (processing steps are not shown here; those workflows partially cleaned and formatted the data), as well as a shapefile containing the Hells Canyon bighorn sheep popultion range polygons delineated by managers at Fish & Game/Wildlife.
+
+The "raw" data that was shared by the state wildlife agencies include separate data frames containing information on bighorn sheep locations, on individual animals, and on VHF/GPS collar deployments. Figure 2.1 shows how these data tables relate to each other in an Entity Relationship Diagram (ERD).
+
+```{r fig.cap = "ERD for Hells Canyon bighorn sheep data. PK indicates primary key and FK indicates foreign key.", fig.align='center', out.width='80%', echo = FALSE}
+
+knitr::include_graphics("images/ERD.png")
+
+```
+
+
+
+## Database creation
+
+While the rest of this workflow starts from the multi-state model inputs, here we show how the "raw" data tables relate to each other, and how they can be formatted and input into a SQL database.
+
+Below are the steps required to build a relational database containing the three tables described in the ERD above.
+
+### Load packages and initiate database
+
+```{r database setup, warning=FALSE}
+# Load packages ----
+library(DBI)
+library(RSQLite)
+
+# Create database ----
+# for Hells Canyon bighorn sheep data
+bighorn_db <- dbConnect(SQLite(), "hells_canyon_bighorn_sheep.db")
+
+```
+
+### Create animals table
+
+The animals table contains data on the individual bighorn sheep in the dataset and includes the following columns: animal_id (primary key; individual identity for each animal), population (the home population of an individual), sex, date_of_birth, and source (source indicates whether an individual is a resident of Hells Canyon who was never translocated (R), is a resident of Hells Canyon who was translocated within the Hells Canyon metapopulation (RT), or is a translocated animal originating from outside of the Hells Canyon metapopulation (T)).
+
+```{r animals table setup, eval=FALSE}
+
+# Create animals table in SQL: ----
+dbExecute(bighorn_db,
+          "CREATE TABLE animals (
+          animal_id char(6) NOT NULL PRIMARY KEY,
+          population varchar(20),
+          sex char(1) CHECK (sex IN ('M', 'F', '')),
+          date_of_birth date,
+          source varchar(2) CHECK (source IN ('R', 'RT', 'T'))
+          );")
+
+# Load animals csv into R
+animals <- read.csv("input_data/animals.csv", stringsAsFactors = FALSE)
+
+# Check if column names match between SQL table and csv file
+colnames(animals)
+
+# re-name columns from animals data frame to match the SQL table created above
+colnames(animals) <- c("animal_id", "population", "sex", "source", "date_of_birth")
+
+# Input data from csv into SQL table
+dbWriteTable(bighorn_db, "animals", animals, append = TRUE)
+
+
+```
+
+
+### Create collars table
+
+The collars table contains info about each collar deployment and includes the following columns: collar_deployment_id (primary key; unique identity for each collar deployment), animal_ID (foreign key linking the collars table with the animals table), collar_serial_number, deployment_start_date, deployment_end_date, collar_type, frequency, and manufacturer.
+
+```{r collars table setup, eval=FALSE}
+
+
+# Create collars table in SQL: ----
+dbExecute(bighorn_db,
+          "CREATE TABLE collars (
+          collar_deployment_id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+          animal_id char(6),
+          collar_serial_number varchar(14),
+          deployment_start_date date,
+          deployment_end_date date,
+          collar_type varchar(14),
+          frequency real,
+          manufacturer varchar(25), 
+          FOREIGN KEY (animal_id) REFERENCES animals(animal_id)
+          );")
+
+# Load collars csv into R
+collars <- read.csv("input_data/collars.csv", stringsAsFactors = FALSE)
+
+# Check if column names match between SQL table and csv file
+colnames(collars)
+
+# re-name columns from collars data frame to match the SQL table created above
+colnames(collars) <- c("animal_id", 
+                               "deployment_start_date", "deployment_end_date",
+                               "collar_type", "frequency", "manufacturer",
+                               "collar_serial_number")
+
+
+# Input data from csv into SQL table
+dbWriteTable(bighorn_db, "collars", collars, append = TRUE)
+
+```
+
+### Create locations table
+
+The locations table contains info about each bighorn sheep location and includes the following columns: location_id (primary key; unique identity for each bighorn sheep location), collar_deployment_id (foreign key linking the locations table with the collars table), date, time, latitude, longitude, and location_type (either the location was recorded from a GPS-collar (GPS), or from a ground-based field survey (G) or an aerial-based field survey (A)).
+
+```{r locations table setup, eval=FALSE}
+
+# Create locations table in SQL: ----
+dbExecute(bighorn_db,
+          "CREATE TABLE locations (
+          location_id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+          collar_deployment_id integer,
+          date date,
+          time char(8),
+          latitude real,
+          longitude real,
+          location_type varchar(3),
+          FOREIGN KEY (collar_deployment_id) REFERENCES collars(collar_deployment_id)
+          );")
+
+# Load locations csv into R
+locations <- read.csv("input_data/locations.csv", stringsAsFactors = FALSE)
+
+# create collar_deployment_id column and add it to this dataframe: ----
+# based on the colar_deployment_id in the SQL table
+
+# pull the SQL collars table into the environment as an object
+sql_collars <- dbGetQuery(bighorn_db, "SELECT * FROM collars")
+# turn deployment_start_date into a date using lubridate package's dmy function
+sql_collars$deployment_start_date <- lubridate::dmy(sql_collars$deployment_start_date)
+# turn deployment_end_date into a date using lubridate package's dmy function
+sql_collars$deployment_end_date <- lubridate::dmy(sql_collars$deployment_end_date)
+# replace collar deployment_end_dates that are NA (haven't dropped yet) with today's date
+sql_collars[which(is.na(sql_collars$deployment_end_date)),]$deployment_end_date <- Sys.Date()
+
+# add the appropriate collar_deployment_id to each row of the locations table
+locations$collar_deployment_id <- do.call("rbind", lapply(1:nrow(locations), function(x){
+  print(x)
+  # pull out the animal ID and date for each location
+  animal_id <- locations$ANIMALID[x]
+  date <- lubridate::mdy(locations$DATE[x])
+  # subset sql_collars to the animal ID and date range that matches the location
+  # and return the appropriate collar_deployment_id
+  collar_deployment_id <- sql_collars[intersect(which(sql_collars$animal_id==animal_id), 
+                                                intersect(which(sql_collars$deployment_start_date <= date), 
+                                                          which(sql_collars$deployment_end_date >= date))),]$collar_deployment_id[1]
+  if (length(collar_deployment_id)==1){return(collar_deployment_id)} else {return(NA)}
+}))
+
+
+# Check if column names match between SQL table and csv file
+colnames(locations)
+
+# subset the locations dataframe to only the necessary columns:
+locations <- locations[,c(33, 3:7)]
+
+# re-name columns from locations data frame to match the SQL table created above
+colnames(locations)[c(2:6)] <- c("date","time","latitude", "longitude", "location_type")
+
+# Input data from csv into SQL table
+dbWriteTable(bighorn_db, "locations", locations, append = TRUE)
+
+```
+
+
+### Check database data
+
+```{r check database data}
+# Check that data was properly loaded into SQL database ----
+bighorn_db <- dbConnect(RSQLite::SQLite(), "hells_canyon_bighorn_sheep.db")
+
+# Check animals table
+dbGetQuery(bighorn_db, "SELECT * FROM animals LIMIT 3;")
+# Check collars table
+dbGetQuery(bighorn_db, "SELECT * FROM collars LIMIT 3;")
+# Check locations table
+dbGetQuery(bighorn_db, "SELECT * FROM locations LIMIT 3;")
+
+```
